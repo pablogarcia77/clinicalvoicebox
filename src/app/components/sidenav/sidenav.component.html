@@ -1,0 +1,27 @@
+<div class="user-view">
+    <div class="background">
+        <img src="assets/images/background.png" alt="fondo">
+    </div>
+    <span class="white-text">
+        <h1>{{persona.apellido}}, {{persona.nombre}}</h1>
+    </span>
+    <span class="white-text">
+        <h5>{{persona.email}}</h5>
+    </span>
+</div>
+<div class="container">
+    <div class="row">
+        <h1 class="versalita title">Clinical Voice Box</h1>
+    </div>
+    <div class="row">
+        <ul>
+            <li>Perfil</li>
+            <li [routerLink]="['agenda']" (click)="closeSidenav()">Agenda</li>
+            <li [routerLink]="['lista-pacientes']" (click)="closeSidenav()">Lista de Pacientes</li>
+            <li (click)="openPlan()">Planificación Terapéutica</li>
+            <li (click)="openNotes()">Notas Personales</li>
+            <li [routerLink]="['about']">Acerca de</li>
+            <li (click)="logOut()">Salir</li>
+        </ul>
+    </div>
+</div>

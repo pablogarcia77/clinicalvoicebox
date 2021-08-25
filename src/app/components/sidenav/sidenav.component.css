@@ -1,0 +1,32 @@
+.user-view{
+    position: relative;
+    padding: 24px 15px 1px;
+    margin-bottom: 8px;
+}
+.background{
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+.mat-h5{
+    margin: -10px 0 21px !important;
+}
+.title{
+    font-size: 2.2rem !important;
+    font-weight: 900 !important;
+}
+ul{
+    padding: 0 30px;
+}
+li{
+    list-style: none;
+    height: 40px;
+    color: rgba(0,0,0,0.87);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}

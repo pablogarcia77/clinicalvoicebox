@@ -1,0 +1,212 @@
+<img src="assets/images/head_inicio.png" alt="" class="w-100">
+<div class="container">
+    <form [formGroup]="registroForm" (submit)="register()">
+        <div class="row">
+            <div class="col s12">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Perez" formControlName="apellido">
+                    <mat-error *ngIf="registroForm.controls.apellido.touched && registroForm.controls.apellido.invalid">
+                        <span *ngIf="registroForm.controls.apellido.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Juan Carlos" formControlName="nombre">
+                    <mat-error *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">
+                        <span *ngIf="registroForm.controls.nombre.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s5">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Genero</mat-label>
+                    <mat-select formControlName="genero" name="food">
+                        <mat-option *ngFor="let genero of generos" [value]="genero.valor">
+                          {{genero.sexo}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="registroForm.controls.genero.touched && registroForm.controls.genero.invalid">
+                        <span *ngIf="registroForm.controls.genero.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col s7">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Documento</mat-label>
+                    <input matInput placeholder="Nro de doc. sin puntos" formControlName="documento">
+                    <mat-error *ngIf="registroForm.controls.documento.touched && registroForm.controls.documento.invalid">
+                        <span *ngIf="registroForm.controls.documento.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>País</mat-label>
+                    <input matInput placeholder="Seleccione" formControlName="pais">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Domicilio del consultorio</mat-label>
+                    <input matInput placeholder="Calle y número" formControlName="consultorio">
+                    <mat-error *ngIf="registroForm.controls.consultorio.touched && registroForm.controls.consultorio.invalid">
+                        <span *ngIf="registroForm.controls.consultorio.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s3">
+                <p>Teléfono</p>
+            </div>
+            <div class="col s3">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>C. País</mat-label>
+                    <input matInput placeholder="Calle y número" formControlName="codArea">
+                    <mat-error *ngIf="registroForm.controls.codArea.touched && registroForm.controls.codArea.invalid">
+                        <span *ngIf="registroForm.controls.codArea.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col s6">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Número de celular</mat-label>
+                    <input matInput placeholder="XXXXXX" formControlName="nroTelefono">
+                    <mat-error *ngIf="registroForm.controls.nroTelefono.touched && registroForm.controls.nroTelefono.invalid">
+                        <span *ngIf="registroForm.controls.nroTelefono.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput placeholder="jcperez@email.com" formControlName="email">
+                    <mat-error *ngIf="registroForm.controls.email.touched && registroForm.controls.email.invalid">
+                        <span *ngIf="registroForm.controls.email.errors?.required">Campo obligatorio</span>
+                        <span *ngIf="registroForm.controls.email.errors?.email">No es una dirección de email válida</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s5">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Fecha de Nacimiento</mat-label>
+                    <input matInput placeholder="DD-MM-AA" formControlName="fechaNacimiento">
+                </mat-form-field>
+            </div>
+            <div class="col s7">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Matricula Profesional</mat-label>
+                    <input matInput placeholder="XXXXX" formControlName="matricula">
+                    <mat-error *ngIf="registroForm.controls.matricula.touched && registroForm.controls.matricula.invalid">
+                        <span *ngIf="registroForm.controls.matricula.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Profesión</mat-label>
+                    <input matInput placeholder="Seleccione" formControlName="profesion">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <mat-checkbox color="primary" [checked]="tos" (change)="changeCB($event.checked)"></mat-checkbox>
+                <mat-label>
+                    Acepto los <span class="primary-text" (click)="viewTOS(tosDialog)">Términos y Condiciones de uso</span>
+                </mat-label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center">
+                <button mat-raised-button color="accent" class="w-100" type="submit">REGISTRARME</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col s12 center">
+            <button mat-raised-button color="accent" class="w-100" type="button" [routerLink]="['/login']">VOLVER</button>
+        </div>
+    </div>
+</div>
+<footer class="mt-50">
+    <app-footer></app-footer>
+</footer>
+<ng-template #tosDialog>
+    <mat-dialog-title>
+        <h1>Términos y Condiciones de uso de la Aplicación</h1>
+    </mat-dialog-title>
+    <mat-dialog-content>
+        <div style="text-align:justify">
+            <p>Los presentes términos y condiciones (en lo sucesivo los <u>"Términos y Condiciones de la Aplicación"</u>)  contienen los acuerdos que rigen <b>(i)</b> la relación entre <b>Rodrigo Maximiliano Jerez</b> (en lo sucesivo la <u>“Sociedad”</u>), con las personas (en lo sucesivo el o los <u>“Usuario(s)”</u>) que descarguen la aplicación desarrollada por la Sociedad (en lo sucesivo la o las <u>“Aplicación(es)”</u>), <b>(ii)</b> así como las marcas, los productos y los servicios que preste la Sociedad (en lo sucesivo los <u>“Servicios”</u>).</p>
+            <p>Al descargar la Aplicación, el Usuario deberá manifestar su aceptación de los presentes Términos y Condiciones de la Aplicación a efecto de poder usarla. En caso de que no los acepte, el Usuario deberá de abstenerse de dicho uso.</p>
+            <p>Con sujeción al cumplimiento de los Términos y Condiciones de la Aplicación, la Sociedad le concede al Usuario o a los Autorizados, una licencia limitada, no exclusiva y no transferible, para descargar e instalar una copia de la Aplicación en cada dispositivo móvil u ordenador que sea de su propiedad o controle, así como ejecutar dicha copia de la Aplicación exclusivamente para su propio uso personal. La licencia anterior no se entiende aplicable a los Servicios que realiza la Sociedad.</p>
+            <p>Cualquier término no definido o cualquier cuestión no prevista en los presentes Términos y Condiciones de la Aplicación serán definidos por la Sociedad en caso de necesidad de interpretación o resolución de controversia.</p>
+            <!-- SERVICIOS -->
+            <h6><b>Servicios</b></h6>
+            <p>La Sociedad pone a disposición del Usuario, o de las personas que éste designe de tiempo en tiempo (el o los <u>“Autorizado(s)”</u>), la presente Aplicación para que la Sociedad pueda realizar de manera eficiente la prestación de los Servicios. La Aplicación está dirigida exclusivamente a fonoaudiólogos, logopedas, terapeutas de Lenguaje o de la Comunicación Humana, otorrinolaringólogo o profesionales competentes en el área y la población que se pretende beneficiar son: niños, adolescentes y adultos con alteraciones de la voz de diferente causa con necesidades terapéuticas, o sin alteraciones de la voz para uso preventivo.</p>
+            <p>La Aplicación de la Sociedad proporcionará al Usuario los servicios de elaboración de formularios, recolección de datos y visualización de resultados en tiempo real para proporcionar al Usuario información cualitativa y cuantitativa a través de los resultados obtenidos con la utilización de la misma por parte del Usuario o los Autorizados. Además, esta herramienta digital puede automatizar y categorizar los indicadores del desarrollo recopilados por el titular, de acuerdo con criterios predeterminados por el sistema de gran relevancia para la (re)habilitación. </p>
+            <p>Los datos ingresados por los Usuarios a través de la Aplicación y obtenidos por la Sociedad serán almacenados bajo estándares internacionales de alta seguridad, los cuales ayudarán a la prestación de los Servicios por medio de la Aplicación.</p>
+            <p>Para que la Sociedad pueda prestar los Servicios, el Usuario se obliga a ingresar los datos solicitados en la Aplicación y la Sociedad podrá asignarle una clave de usuario y una contraseña para que el Usuario ingrese de tiempo en tiempo a su cuenta respectiva. Asimismo, la Sociedad podrá otorgar a los Usuarios un código y un nombre de dispositivo para que los Autorizados puedan acceder, en cualquier lugar, por medio de su dispositivo móvil, a la Aplicación.</p>
+            <p>Cuando el Usuario descarga la Aplicación, ésta puede solicitar al Usuario permiso para acceder al contenido e información de su dispositivo móvil. La Aplicación respetará la privacidad del Usuario, y los permisos que otorgue el Usuario a la Aplicación controlarán el modo en el que ésta use, almacene y transfiera dicho contenido e información.</p>
+            <p>La Aplicación podrá solicitar acceso a cualquier función del dispositivo móvil del Usuario o los Autorizados. El Usuario o los Autorizados podrán dar el permiso para que la Aplicación acceda a las funciones. El Usuario y los Autorizados reconocen y acuerdan que, en caso de que no autoricen el acceso de la Aplicación a cualquier función del dispositivo móvil, la Sociedad no podrá realizar de forma satisfactoria la prestación de  los Servicios, y en este acto, la Sociedad y los Autorizados reconocen y acuerdan que no realizarán reclamación alguna, ya sea judicial o extrajudicial, por cualquier falla u omisión en la prestación de los Servicios, derivado de dicho supuesto previamente mencionado, deslindando a la Sociedad de cualquier daño o perjuicio que pudiera ocasionar dicho supuesto.</p>
+            <p>La Aplicación podrá solicitar, a través del dispositivo móvil, por medio de cualesquier programa o software, la ubicación del Usuario o los Autorizados.</p>
+            <p>La Sociedad se deslindan de toda responsabilidad asociada a los resultados del sistema y de las conclusiones propias de cada titular. La Aplicación y los resultados que de su uso deriven, no reemplaza la opinión profesional ni aporta un diagnóstico, mismo que es inferido por el titular a su leal saber y entender.</p>
+            <h6><b>Uso del contenido y la información</b></h6>
+            <p>El Usuario es propietario de todo el contenido y la información que proporciona a la Sociedad. Se recopilan diferentes tipos de información relacionada con el Usuario o los Autorizados en función de los Servicios que use.</p>
+            <p>La Sociedad recopila todos los datos que el Usuario o los Autorizados proporcionan al usar los Servicios o la Aplicación, así como información sobre el modo en que el Usuario y los Autorizados usan los Servicios. Además, la Sociedad recopila información acerca de las computadoras, los teléfonos u otros dispositivos en los que el Usuario o los Autorizados instalan la Aplicación, así como los datos generados por dichos dispositivos, en función de los permisos que el Usuario o los Autorizados concedan.</p>
+            <p>El Usuario y el Autorizado acuerdan y consienten que, con el solo hecho de instalar esta Aplicación, acepta que los datos e información que proporcionen a la Sociedad, así como cualesquier registro que la Sociedad obtenga por prestar los Servicios, pertenecerán en forma exclusiva a ésta, por lo que la Sociedad será propietaria de dicha información o datos proporcionados por el Usuario o el Autorizado, quienes en este acto renuncian a cualesquier acción o reclamo derivado por la transmisión de dicha información.</p>
+            <p>La Sociedad manifiesta que los datos personales y datos personales sensibles se utilizarán única y exclusivamente para funcionamiento del sistema, para análisis estadísticos e investigación en las áreas de competencia que beneficien a un mayor número de personas manteniendo el anonimato de cada Usuario y/o Autorizado. </p>
+            <p>En el caso de que el Usuario o el Autorizado, por cualquier causa, proporcione, de cualquier forma, a la Sociedad cualquier marca, patente, nombre comercial, aviso comercial, signo distintivo, o cualesquiera otros derechos de propiedad industrial o intelectual (en lo sucesivo <u>"Contenido de PI"</u>), le concede a la Sociedad una licencia no exclusiva, transferible, con derechos de sublicencia, libre de regalías y aplicable en todo el mundo para utilizar cualquier Contenido de PI. Esta licencia finaliza cuando el Usuario da por terminado los presentes Términos y Condiciones de la Aplicación mediante aviso por escrito a la Sociedad.</p>
+            <p>La Sociedad no garantiza que la Aplicación sea siempre segura, libre de errores, y que funcione sin interrupciones, retrasos o imperfecciones. La Aplicación podrá actualizarse de tiempo en tiempo previa autorización por parte del dueño del dispositivo móvil donde sea instalada. El Usuario y el Autorizado reconocen y acuerdan que, en caso de que no actualizan la Aplicación, la misma podrá presentar fallas y errores, entorpeciendo la prestación de los Servicios por parte de la Sociedad; derivado de lo anterior, el Usuario y el Autorizado deslindan a la Sociedad de cualquier falla, daño o perjuicio que lo anterior pudiera ocasionarles y se abstendrán de presentar cualquier reclamación, ya sea judicial o extrajudicial, derivado de dicho supuesto.</p>
+            <h6><b>Acceso y descarga de la aplicación desde iTunes o Android</b></h6>
+            <p>El Usuario reconoce y acepta en cumplir con todos los términos y condiciones aplicables respecto a la obtención, descarga y actualización de la Aplicación que las empresas conocidas como iTunes o Android, respectivamente, determinen.</p>
+            <h6><b>Seguridad</b></h6>
+            <p>La Sociedad, en la medida de lo posible, realizará los actos necesarios para que la Aplicación proteja toda la información y bases de datos que haya proporcionado a la Sociedad. Independientemente de lo anterior, el Usuario y el Autorizado deberán realizar lo siguiente:</p>
+            <p>1.- No ingresar a la Aplicación virus ni códigos maliciosos de ningún tipo.<br>
+            2.- No solicitar información de inicio de sesión ni acceder a una cuenta perteneciente a otro Usuario. <br>
+            3.- No utilizar la Aplicación para actos ilícitos, engañosos, malintencionados o discriminatorios. <br>
+            4.- No realizar ninguna acción que pudiera inhabilitar, sobrecargar o afectar al funcionamiento correcto de la Aplicación o a su aspecto. <br>
+            5.- No proporciona nombres y datos falsos. <br>
+            6.- No proporcionar información personal falsa, ni crear una cuenta para otras personas sin su autorización. <br>
+            7.- No crear más de una cuenta personal. <br>
+            8.- No crear otra cuenta sin el permiso de la Sociedad, en caso de que la Sociedad inhabilite la cuenta del Usuario. <br>
+            9.- No transferir la cuenta de usuario que administre a nadie sin el previo consentimiento por escrito de la Sociedad. <br>
+            10.- No publicar contenido ni realizar ninguna acción en la Aplicación que infrinja o vulnere los derechos de terceros o que vulnere cualquiera ley de algún modo. <br>
+            11.- La Sociedad podrá retirar cualquier contenido o información que ingrese a la Aplicación, sí la Sociedad considera que infringe cualquiera política. <br>
+            12.- No utilizar las marcas, signos distintivos, nombres comerciales, derechos de autor, o cualesquiera otros derechos de propiedad intelectual o industrial, salvo previo consentimiento por escrito de la Sociedad. <br></p>
+            <h6><b>Tarifas de los dispositivos móviles</b></h6>
+            <p>Actualmente la Sociedad ofrece la Aplicación para dispositivos móviles de forma gratuita. Sin embargo, la Sociedad se reserva el derecho de realizar cualquier cobro en el futuro por la utilización de la Aplicación, así como para ofrecer diversos servicios con costo que solo podrán utilizar los Usuarios o Autorizados que realicen los pagos respectivos.</p>
+            <h6><b>Modificaciones</b></h6>
+            <p>En caso de que la Sociedad realice alguna modificación a los presentes Términos y Condiciones de la Aplicación, notificará al Usuario de las mismas en un periodo de 10 (diez) días naturales después de haber hecho dichas modificaciones, a efecto de que el Usuario de su consentimiento expreso o tácito, o en su caso solicite la terminación de los mismos.</p>
+            <p>El uso continuado por parte del Usuario de los Servicios o de la Aplicación, después de recibir la notificación sobre los cambios en los Términos y Condiciones de la Aplicación, políticas o normas supone la aceptación de las modificaciones.</p>
+            <p>El Usuario o los Autorizados no podrán ceder los derechos y obligaciones derivados de los presentes Términos y Condiciones de la Aplicación, sin el previo consentimiento por escrito otorgado por la Sociedad. La Sociedad podrá ceder las obligaciones y derechos derivados de los presentes Términos y Condiciones de la Aplicación a cualquier tercero sin el previo consentimiento por parte de los Usuarios o los Autorizados.</p>
+            <p>El Usuario y los Autorizados acuerdan que los presentes Términos y Condición de la Aplicación regulan el uso de la Aplicación, y por ningún motivo sustituyen cualquier contrato, convenio o acuerdo previamente firmado con la Sociedad.</p>
+            <h6><b>Terminación</b></h6>
+            <p>Si el Usuario infringe los Términos y Condiciones de la Aplicación, crea riesgos de cualquier tipo para la Sociedad o la expone a posibles responsabilidades jurídicas, la Sociedad podrá impedir el acceso al Usuario a la Aplicación total o parcialmente. La Sociedad notificará por correo electrónico o la próxima vez que el Usuario intente acceder a su cuenta. El Usuario podrá eliminar su cuenta o desactivar su Aplicación en cualquier momento. Independientemente de lo anterior, la sociedad se reserva el derecho de ejercer cualquier acción legal aplicable.</p>
+            <h6><b>Conflictos</b></h6>
+            <p>La aceptación de los términos y las condiciones aquí descritas deslinda de cualquier tipo de responsabilidad civil, penal, laboral, fiscal o de seguridad social a la Sociedad. </p>
+            <p>El Usuario se obliga a sacar en paz y a salvo a la Sociedad sus afiliadas, directivos, accionistas, empleados y a pagar cualesquiera gastos, pérdida, daños (incluidos los costos y honorarios judiciales) de cualquier demanda, causa de acción o conflicto que interponga un tercero (en lo sucesivo la "Demanda"), que pudiera surgir derivada de las acciones, contenido o información en la Aplicación. Asimismo, para el caso de interpretación, cumplimiento o conflicto de los presentes Términos y Condiciones de la Aplicación, el Usuario y la Sociedad se sujetan a las leyes aplicables de la República Argentina, renunciando a cualquier fuero que pudiera corresponderles por razón de sus domicilios, presentes o futuros o por cualesquiera otras causas.</p>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-flat-button (click)="acceptTOS()">Aceptar</button>
+    </mat-dialog-actions>
+</ng-template>

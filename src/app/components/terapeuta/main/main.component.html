@@ -1,0 +1,24 @@
+<mat-drawer-container class="example-container">
+    <mat-drawer #drawer class="example-sidenav" mode="over" position="end">
+        <app-sidenav [persona]="persona" [sidenav]="drawer"></app-sidenav>
+    </mat-drawer>
+    
+    <img src="assets/images/CVB.png" alt="" width="100%" class="head-img">
+    <mat-icon (click)="drawer.toggle()" class="menu">menu</mat-icon>
+    <nav>
+        <div class="row center">
+            <div class="col s4">
+                <mat-icon (click)="back()">keyboard_arrow_left</mat-icon>
+            </div>
+            <div class="col s4">
+                <mat-icon [routerLink]="['/terapeutas']">home</mat-icon>
+            </div>
+            <div class="col s4">
+                <mat-icon [routerLink]="['/terapeutas/agenda']">calendar_today</mat-icon>
+            </div>
+        </div>
+    </nav>
+
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+</mat-drawer-container>

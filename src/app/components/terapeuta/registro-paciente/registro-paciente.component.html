@@ -1,0 +1,133 @@
+<div class="container">
+    <div class="row">
+        <h2 class="titulo versalita">Nuevo Paciente</h2>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <form [formGroup]="registroForm" (submit)="register()">
+                <div class="row">
+                    <div class="col s12">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput placeholder="Perez" formControlName="apellido">
+                            <mat-error *ngIf="registroForm.controls.apellido.touched && registroForm.controls.apellido.invalid">
+                                <span *ngIf="registroForm.controls.apellido.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Juan Carlos" formControlName="nombre">
+                            <mat-error *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">
+                                <span *ngIf="registroForm.controls.nombre.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s5">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Genero</mat-label>
+                            <mat-select formControlName="genero" name="food">
+                                <mat-option *ngFor="let genero of generos" [value]="genero.valor">
+                                  {{genero.sexo}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="registroForm.controls.genero.touched && registroForm.controls.genero.invalid">
+                                <span *ngIf="registroForm.controls.genero.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col s7">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Documento</mat-label>
+                            <input matInput placeholder="Nro de doc. sin puntos" formControlName="documento">
+                            <mat-error *ngIf="registroForm.controls.documento.touched && registroForm.controls.documento.invalid">
+                                <span *ngIf="registroForm.controls.documento.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Profesión</mat-label>
+                            <input matInput placeholder="Seleccione" formControlName="profesion">
+                        </mat-form-field>
+                    </div>
+                    <div class="col s6">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Fecha de Nacimiento</mat-label>
+                            <input matInput placeholder="DD-MM-AA" formControlName="fechaNacimiento">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>País</mat-label>
+                            <input matInput placeholder="Seleccione" formControlName="pais">
+                            <mat-error *ngIf="registroForm.controls.pais.touched && registroForm.controls.pais.invalid">
+                                <span *ngIf="registroForm.controls.pais.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Domicilio</mat-label>
+                            <input matInput placeholder="Calle y número" formControlName="domicilio">
+                            <mat-error *ngIf="registroForm.controls.domicilio.touched && registroForm.controls.domicilio.invalid">
+                                <span *ngIf="registroForm.controls.domicilio.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <p>Teléfono</p>
+                    </div>
+                    <div class="col s3">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>C. País</mat-label>
+                            <input matInput placeholder="Calle y número" formControlName="codArea">
+                            <mat-error *ngIf="registroForm.controls.codArea.touched && registroForm.controls.codArea.invalid">
+                                <span *ngIf="registroForm.controls.codArea.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col s6">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Número de celular</mat-label>
+                            <input matInput placeholder="XXXXXX" formControlName="nroTelefono">
+                            <mat-error *ngIf="registroForm.controls.nroTelefono.touched && registroForm.controls.nroTelefono.invalid">
+                                <span *ngIf="registroForm.controls.nroTelefono.errors?.required">Campo obligatorio</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Correo electrónico</mat-label>
+                            <input matInput placeholder="jcperez@email.com" formControlName="email">
+                            <mat-error *ngIf="registroForm.controls.email.touched && registroForm.controls.email.invalid">
+                                <span *ngIf="registroForm.controls.email.errors?.required">Campo obligatorio</span>
+                                <span *ngIf="registroForm.controls.email.errors?.email">No es una dirección de email válida</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 center">
+                        <button mat-raised-button color="accent" class="w-100" type="submit">AGREGAR PACIENTE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

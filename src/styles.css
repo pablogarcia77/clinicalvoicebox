@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.w-100{
+    width: 100%;
+}
+.w-70{
+    width: 70%;
+}
+.w-50{
+    width: 50%;
+}
+.principal{
+    min-height: 100vh;
+    background-image: url("assets/images/fondo2.png");
+    background-position: bottom;
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+}
+.mt-50{
+    margin-top: 50px;
+}
+.primary-text{
+    color: #039be5;
+}
+.vh-50{
+    height: 50vh;
+}
+.mt-50p{
+    margin-top: calc(25vh - 10%) !important;
+}
+.versalita{
+    font-variant: small-caps !important;
+}
+.titulo{
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+}
+.bold{
+    font-weight: 600 !important;
+}
+.right{
+    float: right;
+}
+.blue-snackbar button{
+    color: #039be5 !important;
+}

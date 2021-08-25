@@ -1,0 +1,37 @@
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-drawer.mat-drawer-end{
+    padding: 0;
+}
+
+.example-sidenav {
+    padding: 20px;
+    width: 300px;
+}
+.example-container{
+    background-color: transparent;
+    height: 100%;
+}
+
+nav{
+    height: 56px;
+    line-height: 70px;
+    background-color: #009fe3;
+    color: white;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+.head-img{
+    margin-bottom: -10px;
+}
+.menu{
+    position: absolute;
+    z-index: 3;
+    right: 50px;
+    top: 30px;
+    font-size: 4rem;
+}

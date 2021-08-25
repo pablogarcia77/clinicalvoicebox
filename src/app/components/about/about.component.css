@@ -1,0 +1,12 @@
+h1{
+    font-weight: 600;
+}
+.row{
+    text-align: center;
+}
+li{
+    list-style: none;
+}
+.mat-icon{
+    font-size: 1rem;
+}
