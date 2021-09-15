@@ -39,6 +39,15 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { DialogComponent } from './components/terapeuta/dialog/dialog.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import * as moment from 'moment';
+
+export function momentAdapterFactory() {
+  return adapterFactory(moment);
+};
 
 @NgModule({
   declarations: [
@@ -80,9 +89,14 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
   ],
-  providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500,panelClass: ['blue-snackbar']}}],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500,panelClass: ['blue-snackbar']}},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {autoFocus: false,hasBackdrop: true,disableClose: true, width: '90%'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

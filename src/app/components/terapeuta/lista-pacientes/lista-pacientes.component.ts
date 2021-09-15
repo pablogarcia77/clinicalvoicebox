@@ -37,7 +37,11 @@ export class ListaPacientesComponent implements OnInit {
     this.terapeuta = JSON.parse(localStorage.getItem('user'))
 
     // console.log(this.terapeuta)
+    this.getAllPacientes()
+    
+  }
 
+  getAllPacientes(){
     this.pacientesService.getAllPacientes(this.terapeuta.terapeuta.id).subscribe(
       response => {
         this.paginator._intl.itemsPerPageLabel = "Pacientes por página:"
@@ -65,6 +69,18 @@ export class ListaPacientesComponent implements OnInit {
           paciente: paciente,
           delete: true
         }
+      }
+    )
+    this.dialog._getAfterAllClosed().subscribe(
+      () => {
+        this.pacientesService.getAllPacientes(this.terapeuta.terapeuta.id).subscribe(
+          response => {
+            this.paginator._intl.itemsPerPageLabel = "Pacientes por página:"
+            this.dataSource = new MatTableDataSource(response)
+            this.dataSource.paginator = this.paginator
+            this.dataSource.sort = this.sort
+          }
+        )
       }
     )
   }

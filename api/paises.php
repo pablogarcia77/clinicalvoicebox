@@ -18,7 +18,7 @@
   */
   if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     //Mostrar todos los pacientes de un terapeuta
-    $sql = $dbConn->prepare("SELECT * FROM paises");
+    $sql = $dbConn->prepare("SELECT id_pais as id, pais, cod_telefonico FROM paises");
     $sql->execute();
     $sql->setFetchMode(PDO::FETCH_ASSOC);
     header("HTTP/1.1 200 OK");

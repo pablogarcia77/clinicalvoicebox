@@ -41,4 +41,11 @@
 		}
 		return $statement;
    }
+
+  function removeAttr($array, $atributo){
+    $arr = array_filter($array, function($k) use ($atributo){
+      return $k != $atributo;
+    }, ARRAY_FILTER_USE_KEY);
+    return $arr;
+  }
  ?>

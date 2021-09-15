@@ -13,6 +13,7 @@ export class Persona {
     telefono: string;
     fecha_nacimiento: Date;
     terapeuta: Terapeuta;
+    pais: number;
     paciente: Paciente;
     
     constructor(){}

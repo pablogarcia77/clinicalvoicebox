@@ -9,7 +9,7 @@
                     <div class="col s12">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Apellido</mat-label>
-                            <input matInput placeholder="Perez" formControlName="apellido">
+                            <input matInput placeholder="Perez" formControlName="apellido" maxlength="50">
                             <mat-error *ngIf="registroForm.controls.apellido.touched && registroForm.controls.apellido.invalid">
                                 <span *ngIf="registroForm.controls.apellido.errors?.required">Campo obligatorio</span>
                             </mat-error>
@@ -20,7 +20,7 @@
                     <div class="col s12">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Nombre</mat-label>
-                            <input matInput placeholder="Juan Carlos" formControlName="nombre">
+                            <input matInput placeholder="Juan Carlos" formControlName="nombre" maxlength="50">
                             <mat-error *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">
                                 <span *ngIf="registroForm.controls.nombre.errors?.required">Campo obligatorio</span>
                             </mat-error>
@@ -44,9 +44,10 @@
                     <div class="col s7">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Documento</mat-label>
-                            <input matInput placeholder="Nro de doc. sin puntos" formControlName="documento">
+                            <input matInput placeholder="Nro de doc. sin puntos" formControlName="documento" maxlength="10">
                             <mat-error *ngIf="registroForm.controls.documento.touched && registroForm.controls.documento.invalid">
                                 <span *ngIf="registroForm.controls.documento.errors?.required">Campo obligatorio</span>
+                                <span *ngIf="registroForm.controls.documento.errors?.pattern">Solo se admiten números</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -55,13 +56,22 @@
                     <div class="col s6">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Profesión</mat-label>
-                            <input matInput placeholder="Seleccione" formControlName="profesion">
+                            <mat-select formControlName="profesion" name="profesion">
+                                <mat-option *ngFor="let profesion of profesiones" [value]="profesion.id">
+                                  {{profesion.profesion}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="registroForm.controls.profesion.touched && registroForm.controls.profesion.invalid">
+                                <span *ngIf="registroForm.controls.profesion.errors?.required">Campo obligatorio</span>
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col s6">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Fecha de Nacimiento</mat-label>
-                            <input matInput placeholder="DD-MM-AA" formControlName="fechaNacimiento">
+                            <input matInput [matDatepicker]="picker" placeholder="DD-MM-AA" formControlName="fechaNacimiento">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
                         </mat-form-field>
                     </div>
                 </div>
@@ -69,9 +79,13 @@
                     <div class="col s12">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>País</mat-label>
-                            <input matInput placeholder="Seleccione" formControlName="pais">
-                            <mat-error *ngIf="registroForm.controls.pais.touched && registroForm.controls.pais.invalid">
-                                <span *ngIf="registroForm.controls.pais.errors?.required">Campo obligatorio</span>
+                            <mat-select name="pais" formControlName="pais" (selectionChange)="changed($event.value)">
+                                <mat-option *ngFor="let pais of paises" [value]="pais">
+                                  {{pais.pais}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="registroForm.controls.profesion.touched && registroForm.controls.profesion.invalid">
+                                <span *ngIf="registroForm.controls.profesion.errors?.required">Campo obligatorio</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -94,7 +108,7 @@
                     <div class="col s3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>C. País</mat-label>
-                            <input matInput placeholder="Calle y número" formControlName="codArea">
+                            <input matInput placeholder="Calle y número" formControlName="codArea" readonly>
                             <mat-error *ngIf="registroForm.controls.codArea.touched && registroForm.controls.codArea.invalid">
                                 <span *ngIf="registroForm.controls.codArea.errors?.required">Campo obligatorio</span>
                             </mat-error>
@@ -103,9 +117,10 @@
                     <div class="col s6">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Número de celular</mat-label>
-                            <input matInput placeholder="XXXXXX" formControlName="nroTelefono">
+                            <input matInput placeholder="XXXXXX" formControlName="nroTelefono" maxlength="10">
                             <mat-error *ngIf="registroForm.controls.nroTelefono.touched && registroForm.controls.nroTelefono.invalid">
                                 <span *ngIf="registroForm.controls.nroTelefono.errors?.required">Campo obligatorio</span>
+                                <span *ngIf="registroForm.controls.nroTelefono.errors?.pattern">Solo se admiten números</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -114,7 +129,7 @@
                     <div class="col s12">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Correo electrónico</mat-label>
-                            <input matInput placeholder="jcperez@email.com" formControlName="email">
+                            <input matInput placeholder="jcperez@email.com" formControlName="email" maxlength="100">
                             <mat-error *ngIf="registroForm.controls.email.touched && registroForm.controls.email.invalid">
                                 <span *ngIf="registroForm.controls.email.errors?.required">Campo obligatorio</span>
                                 <span *ngIf="registroForm.controls.email.errors?.email">No es una dirección de email válida</span>
@@ -124,7 +139,7 @@
                 </div>
                 <div class="row">
                     <div class="col s12 center">
-                        <button mat-raised-button color="accent" class="w-100" type="submit">AGREGAR PACIENTE</button>
+                        <button mat-raised-button color="accent" class="w-100" type="submit" [disabled]="registroForm.invalid">AGREGAR PACIENTE</button>
                     </div>
                 </div>
             </form>

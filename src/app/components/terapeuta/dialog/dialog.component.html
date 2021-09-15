@@ -1,26 +1,63 @@
-<mat-card-header>
-    <div class="row">
-        <h1 *ngIf="delete">Confirme</h1>
-        <h1 *ngIf="share">Compartir Paciente</h1>
-    </div>
-</mat-card-header>
-<mat-card-content>
-    <div class="row" *ngIf="delete">
+<div *ngIf="delete">
+    <mat-card-header>
+        <h1>Confirme</h1>
+    </mat-card-header>
+    <mat-card-content>
         <p>Está por eliminar al paciente:</p>
         <p>{{paciente.apellido}}, {{paciente.nombre}}</p>
         <p class="bold">No se podrán recuperar los datos luego de eliminar</p>
         <p>¿Está seguro?</p>
-    </div>
-    <div class="row" *ngIf="share">
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button class="right" mat-dialog-close (click)="deletePaciente()">ACEPTAR</button>
+        <button mat-flat-button class="right" mat-dialog-close>CANCELAR</button>
+    </mat-card-actions>    
+</div>
+
+
+<div *ngIf="share">
+    <mat-card-header>
+        <h1>Compartir Paciente</h1>
+    </mat-card-header>
+    <mat-card-content>
         <p>Paciente: {{paciente.apellido}}, {{paciente.nombre}}</p>
         <select name="" id="">
             <option value="">1</option>
             <option value="">2</option>
             <option value="">3</option>
         </select>
-    </div>
-</mat-card-content>
-<mat-card-actions>
-    <button mat-flat-button class="right">ACEPTAR</button>
-    <button mat-flat-button class="right">CANCELAR</button>
-</mat-card-actions>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button class="right" mat-dialog-close>ACEPTAR</button>
+        <button mat-flat-button class="right" mat-dialog-close>CANCELAR</button>
+    </mat-card-actions>  
+</div>
+
+<div *ngIf="registroPaciente">
+    <mat-card-header>
+        <h1>Aviso</h1>
+    </mat-card-header>
+    <mat-card-content>
+        <p>Los datos de acceso para el paciente serán el número de <span class="bold">documento, registro o cedula de indentidad</span> y el <span class="bold">teléfono.</span> Asegurate de colocarlos correctamente</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button class="right" mat-dialog-close>ENTENDIDO</button>
+    </mat-card-actions>  
+</div>
+
+
+<div *ngIf="registroSuccess">
+    <mat-card-header>
+        <p class="center">Paciente registrado correctamente</p>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col s12">
+                <button mat-raised-button class="btn col s12 accent-4 waves-effect waves-light light-blue" type="button">Agregar Primera Sesión</button>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button class="right" mat-dialog-close>ACEPTAR</button>
+    </mat-card-actions>  
+</div>

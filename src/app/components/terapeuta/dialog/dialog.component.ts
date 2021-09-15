@@ -17,20 +17,26 @@ export class DialogComponent implements OnInit {
 
   public delete!: boolean
 
+  public registroPaciente!: boolean
+
+  public registroSuccess!: boolean
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: {paciente: any,share: boolean,delete: boolean},
+    public data: {paciente: any,share: boolean,delete: boolean,registroPaciente: boolean, registroSuccess: boolean},
     private pacientesService: PacientesService,
     private snackBar: MatSnackBar
   ) {
     this.share = this.data.share
     this.delete = this.data.delete
+    this.registroPaciente = this.data.registroPaciente
+    this.registroSuccess = this.data.registroSuccess
     this.paciente = new Persona()
     this.paciente = data.paciente
   }
 
   ngOnInit(): void {
-    console.log(this.paciente.paciente)
+    // console.log(this.paciente.paciente)
     
   }
 
@@ -44,10 +50,6 @@ export class DialogComponent implements OnInit {
         }
       )
     }
-  }
-
-  blockPaciente(){
-
   }
 
 }

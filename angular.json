@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.css",
               "src/assets/css/materialize.css",
               "src/assets/css/cvb-theme.scss"
@@ -89,6 +90,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.css",
               "src/assets/css/materialize.css",
               "src/assets/css/cvb-theme.scss"

@@ -31,4 +31,8 @@ export class PacientesService {
     return this.http.put(this.urlBase,newPaciente)
   }
 
+  postPaciente(paciente: any):Observable<any>{
+    return this.http.post(this.urlBase,paciente)
+  }
+
 }

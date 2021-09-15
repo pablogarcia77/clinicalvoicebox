@@ -20,6 +20,7 @@ const routes: Routes = [
     [
       {path: '', component: PrincipalTerapeutaComponent},
       {path: 'nuevo-paciente',component: RegistroPacienteComponent},
+      {path: 'editar-paciente/:paciente',component: RegistroPacienteComponent},
       {path: 'lista-pacientes', component: ListaPacientesComponent},
       {path: 'agenda', component: AgendaComponent},
       {path: 'about', component: AboutComponent},

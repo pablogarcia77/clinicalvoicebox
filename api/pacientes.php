@@ -52,11 +52,11 @@
     }else {
       //Mostrar un usuario especifico
       $sql = $dbConn->prepare("SELECT * FROM pacientes WHERE id_paciente=:id");
-      $sql->bindValue(':id', $_GET['id']);
+      $sql->bindValue(':id', $_GET['paciente']);
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
       header("HTTP/1.1 200 OK");
-      echo json_encode( $sql->fetchAll()  );
+      echo json_encode( $sql->fetch()  );
       exit();
     }
   }
@@ -64,15 +64,25 @@
   // Crear un nuevo pedido
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $input = json_decode(file_get_contents('php://input'),true);
-    $sql = $dbConn->prepare("INSERT INTO cursos (curso) VALUES (:curso)");
-    bindAllValues($sql, $input);
+    $sql = $dbConn->prepare("INSERT INTO personas (apellido,nombre,sexo,documento,domicilio,telefono,email,fecha_nacimiento,id_pais) VALUES (:apellido,:nombre,:sexo,:documento,:domicilio,:telefono,:email,:fecha_nacimiento,:id_pais)");
+    $idProfesion = $input['id_profesion'];
+    $pac = removeAttr($input,'id_profesion');
+    bindAllValues($sql, $pac);
+
+    // echo json_encode($pac);
     try{
       $sql->execute();
-      $cursoId = $dbConn->lastInsertId();
-      if($cursoId){
-        $input['id'] = $cursoId;
+      $personaId = $dbConn->lastInsertId();
+      if($personaId){
+        $input['id'] = $personaId;
+        $paciente = $dbConn->prepare("INSERT INTO pacientes (id_persona,id_profesion) VALUES (:id_persona,:id_profesion)");
+        $paciente->bindValue(':id_persona',$personaId);
+        $paciente->bindValue(':id_profesion',$idProfesion);
+        $paciente->execute();
+        $input['paciente']['id'] = $dbConn->lastInsertId();
+        $input['paciente']['id_profesion'] = $idProfesion;
         header("HTTP/1.1 200 OK");
-        echo json_encode(true);
+        echo json_encode($input);
         exit();
       }
     }catch(PDOException $e){
