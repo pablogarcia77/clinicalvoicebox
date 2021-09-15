@@ -110,9 +110,7 @@ export class ListaPacientesComponent implements OnInit {
   }
 
   editPaciente(paciente: any){
-    console.log('Feature editar paciente')
-
-    
+    console.log('Editar paciente feature')
   }
 
 }
