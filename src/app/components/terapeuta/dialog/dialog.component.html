@@ -1,3 +1,4 @@
+<!-- Delete Paciente -->
 <div *ngIf="delete">
     <mat-card-header>
         <h1>Confirme</h1>
@@ -14,7 +15,7 @@
     </mat-card-actions>    
 </div>
 
-
+<!-- Share Paciente -->
 <div *ngIf="share">
     <mat-card-header>
         <h1>Compartir Paciente</h1>
@@ -33,6 +34,7 @@
     </mat-card-actions>  
 </div>
 
+<!-- Register Paciente Alert Credentials -->
 <div *ngIf="registroPaciente">
     <mat-card-header>
         <h1>Aviso</h1>
@@ -45,7 +47,7 @@
     </mat-card-actions>  
 </div>
 
-
+<!-- Register Ok -->
 <div *ngIf="registroSuccess">
     <mat-card-header>
         <p class="center">Paciente registrado correctamente</p>
@@ -61,3 +63,14 @@
         <button mat-flat-button class="right" mat-dialog-close>ACEPTAR</button>
     </mat-card-actions>  
 </div>
+
+<!-- Edit Paciente -->
+<div *ngIf="editarPaciente">
+    <mat-card-header>
+        <p class="center">Se actualizaron los datos del Paciente</p>
+    </mat-card-header>
+    <mat-card-actions>
+        <button mat-flat-button class="right" mat-dialog-close [routerLink]="['terapeutas/lista-pacientes']">ACEPTAR</button>
+    </mat-card-actions>  
+</div>
+

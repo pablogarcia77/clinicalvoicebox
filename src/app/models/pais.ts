@@ -1,6 +1,6 @@
 export class Pais {
 
-    id_pais: number;
+    id: number;
     pais: string;
     cod_telefonico: string;
 

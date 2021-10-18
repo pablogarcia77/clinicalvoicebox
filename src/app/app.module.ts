@@ -44,6 +44,9 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
+import { MatCarouselModule } from '@ngbmodule/material-carousel';
+import { ChartsModule } from 'ng2-charts';
+import { ChartComponent } from './components/chart/chart.component';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -81,16 +84,19 @@ export function momentAdapterFactory() {
     PrincipalTerapeutaComponent,
     PrincipalPacienteComponent,
     SidenavComponent,
-    DialogComponent
+    DialogComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ChartsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
+    MatCarouselModule,
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500,panelClass: ['blue-snackbar']}},

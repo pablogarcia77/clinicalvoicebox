@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row">
-        <h2 class="titulo versalita">Nuevo Paciente</h2>
+        <h2 class="titulo versalita" *ngIf="!editMode">Nuevo Paciente</h2>
+        <h2 class="titulo versalita" *ngIf="editMode">Editar Paciente</h2>
     </div>
     <div class="row">
         <div class="col s12">
@@ -80,7 +81,7 @@
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>País</mat-label>
                             <mat-select name="pais" formControlName="pais" (selectionChange)="changed($event.value)">
-                                <mat-option *ngFor="let pais of paises" [value]="pais">
+                                <mat-option *ngFor="let pais of paises" [value]="pais.id">
                                   {{pais.pais}}
                                 </mat-option>
                             </mat-select>
@@ -102,25 +103,37 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s3">
-                        <p>Teléfono</p>
+                    <div *ngIf="!paciente">
+                        <div class="col s3">
+                            <p>Teléfono</p>
+                        </div>
+                        <div class="col s3">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>C. Area</mat-label>
+                                <input matInput placeholder="Calle y número" formControlName="codArea" readonly>
+                                <mat-error *ngIf="registroForm.controls.codArea.touched && registroForm.controls.codArea.invalid">
+                                    <span *ngIf="registroForm.controls.codArea.errors?.required">Campo obligatorio</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col s6">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Número de celular</mat-label>
+                                <input matInput placeholder="XXXXXX" formControlName="nroTelefono" maxlength="10">
+                                <mat-error *ngIf="registroForm.controls.nroTelefono.touched && registroForm.controls.nroTelefono.invalid">
+                                    <span *ngIf="registroForm.controls.nroTelefono.errors?.required">Campo obligatorio</span>
+                                    <span *ngIf="registroForm.controls.nroTelefono.errors?.pattern">Solo se admiten números</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
-                    <div class="col s3">
+                    <div class="col s12" *ngIf="paciente">
                         <mat-form-field appearance="legacy" class="w-100">
-                            <mat-label>C. País</mat-label>
-                            <input matInput placeholder="Calle y número" formControlName="codArea" readonly>
-                            <mat-error *ngIf="registroForm.controls.codArea.touched && registroForm.controls.codArea.invalid">
-                                <span *ngIf="registroForm.controls.codArea.errors?.required">Campo obligatorio</span>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col s6">
-                        <mat-form-field appearance="legacy" class="w-100">
-                            <mat-label>Número de celular</mat-label>
-                            <input matInput placeholder="XXXXXX" formControlName="nroTelefono" maxlength="10">
-                            <mat-error *ngIf="registroForm.controls.nroTelefono.touched && registroForm.controls.nroTelefono.invalid">
-                                <span *ngIf="registroForm.controls.nroTelefono.errors?.required">Campo obligatorio</span>
-                                <span *ngIf="registroForm.controls.nroTelefono.errors?.pattern">Solo se admiten números</span>
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput placeholder="XXXXXX" formControlName="telefono" maxlength="10">
+                            <mat-error *ngIf="registroForm.controls.telefono.touched && registroForm.controls.telefono.invalid">
+                                <span *ngIf="registroForm.controls.telefono.errors?.required">Campo obligatorio</span>
+                                <span *ngIf="registroForm.controls.telefono.errors?.pattern">Solo se admiten números</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -137,9 +150,14 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="!paciente">
                     <div class="col s12 center">
                         <button mat-raised-button color="accent" class="w-100" type="submit" [disabled]="registroForm.invalid">AGREGAR PACIENTE</button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="paciente">
+                    <div class="col s12 center">
+                        <button mat-raised-button color="accent" class="w-100" type="button" (click)="editarPaciente()">EDITAR PACIENTE</button>
                     </div>
                 </div>
             </form>

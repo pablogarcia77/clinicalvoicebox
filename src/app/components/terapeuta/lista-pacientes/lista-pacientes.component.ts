@@ -44,6 +44,7 @@ export class ListaPacientesComponent implements OnInit {
   getAllPacientes(){
     this.pacientesService.getAllPacientes(this.terapeuta.terapeuta.id).subscribe(
       response => {
+        // console.log(response)
         this.paginator._intl.itemsPerPageLabel = "Pacientes por página:"
         this.dataSource = new MatTableDataSource(response)
         this.dataSource.paginator = this.paginator

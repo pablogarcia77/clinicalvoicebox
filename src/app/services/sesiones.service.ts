@@ -6,20 +6,16 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PacientesService {
+export class SesionesService {
 
-  private urlBase = environment.url + 'pacientes.php'
+  private urlBase = environment.url + 'sesiones.php'
 
   constructor(
     private http: HttpClient,
   ) {}
 
-  getPacienteById(paciente: any):Observable<any>{
-    return this.http.get(this.urlBase + '?paciente=' + paciente)
-  }
-
-  getAllPacientes(terapeuta: any):Observable<any>{
-    return this.http.get(this.urlBase + '?terapeuta=' + terapeuta)
+  getSesionesByPacienteAndTerapeuta(paciente: any,terapeuta: any):Observable<any>{
+    return this.http.get(this.urlBase + '?paciente=' + paciente + '&terapeuta=' + terapeuta)
   }
 
   deletePaciente(paciente: any):Observable<any>{
@@ -35,8 +31,11 @@ export class PacientesService {
     return this.http.put(this.urlBase,newPaciente)
   }
 
-  postPaciente(paciente: any):Observable<any>{
-    return this.http.post(this.urlBase,paciente)
+  postSesion(paciente: any,terapeuta: any):Observable<any>{
+    let obj = {
+      paciente: paciente,
+      terapeuta: terapeuta
+    }
+    return this.http.post(this.urlBase,obj)
   }
-
 }

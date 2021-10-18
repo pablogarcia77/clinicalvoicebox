@@ -21,9 +21,18 @@ export class DialogComponent implements OnInit {
 
   public registroSuccess!: boolean
 
+  public editarPaciente!: boolean
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: {paciente: any,share: boolean,delete: boolean,registroPaciente: boolean, registroSuccess: boolean},
+    public data: {
+      paciente: any,
+      share: boolean,
+      delete: boolean,
+      registroPaciente: boolean,
+      registroSuccess: boolean,
+      editarPaciente: boolean,
+    },
     private pacientesService: PacientesService,
     private snackBar: MatSnackBar
   ) {
@@ -31,6 +40,7 @@ export class DialogComponent implements OnInit {
     this.delete = this.data.delete
     this.registroPaciente = this.data.registroPaciente
     this.registroSuccess = this.data.registroSuccess
+    this.editarPaciente = this.data.editarPaciente
     this.paciente = new Persona()
     this.paciente = data.paciente
   }

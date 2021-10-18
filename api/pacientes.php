@@ -51,12 +51,36 @@
       }
     }else {
       //Mostrar un usuario especifico
-      $sql = $dbConn->prepare("SELECT * FROM pacientes WHERE id_paciente=:id");
+      // $sql = $dbConn->prepare("SELECT pe.apellido,pe.nombre,pe.sexo,pe.documento,pe.domicilio,pe.telefono,pe.email,pe.fecha_nacimiento,pe.id_pais as pais FROM pacientes pa, personas pe WHERE pa.id_persona=pe.id_persona AND pa.id_paciente=:id");
+      $sql = $dbConn->prepare("SELECT pa.id_persona as id, p.apellido,p.nombre,p.sexo,p.documento,p.domicilio,p.telefono,p.email,p.id_pais,pa.id_paciente,pa.habilitado,p.fecha_nacimiento,pa.aceptoTOS,pa.id_antecedentes,pa.id_patologia,pa.id_profesion,pa.id_dfp,pa.lesion,pa.observaciones
+      FROM pacientes pa, pacientes_terapeutas pate, personas p 
+      WHERE pa.muestra= 1 AND pa.id_persona=p.id_persona AND pate.id_paciente=pa.id_paciente AND pa.id_paciente=:id");
       $sql->bindValue(':id', $_GET['paciente']);
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
       header("HTTP/1.1 200 OK");
-      echo json_encode( $sql->fetch()  );
+      $response = array();
+      $paciente = $sql->fetch();
+      $response['id'] = $paciente['id'];
+      $response['apellido'] = $paciente['apellido'];
+      $response['nombre'] = $paciente['nombre'];
+      $response['fecha_nacimiento'] = $paciente['fecha_nacimiento'];
+      $response['sexo'] = $paciente['sexo'];
+      $response['documento'] = $paciente['documento'];
+      $response['domicilio'] = $paciente['domicilio'];
+      $response['telefono'] = $paciente['telefono'];
+      $response['email'] = $paciente['email'];
+      $response['pais'] = $paciente['id_pais'];
+      $response['paciente']['id'] = $paciente['id_paciente'];
+      $response['paciente']['habilitado'] = ($paciente['habilitado'] == 1) ? true : false;
+      $response['paciente']['aceptoTOS'] = ($paciente['aceptoTOS'] == 1) ? true : false;
+      $response['paciente']['antecedentes'] = $paciente['id_antecedentes'];
+      $response['paciente']['observaciones'] = $paciente['observaciones'];
+      $response['paciente']['patologia'] = $paciente['id_patologia'];
+      $response['paciente']['profesion'] = $paciente['id_profesion'];
+      $response['paciente']['dfp'] = $paciente['id_dfp'];
+      $response['paciente']['lesion'] = $paciente['lesion'];
+      echo json_encode( $response );
       exit();
     }
   }
