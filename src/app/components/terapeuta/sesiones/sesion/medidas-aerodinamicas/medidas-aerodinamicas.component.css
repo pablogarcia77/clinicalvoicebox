@@ -1,0 +1,12 @@
+.input{
+    border: 2px solid teal;
+    border-radius: 4px;
+    width:50px;
+    height: 40px;
+}
+.pt-5{
+    padding-top: 1.7rem;
+}
+.mb-0{
+    margin-bottom: 0;
+}

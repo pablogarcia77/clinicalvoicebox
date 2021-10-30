@@ -50,3 +50,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 0.5rem !important;
     font-weight: 400 !important;
 }
+.border{
+    border: solid 1px #e0e0e0;
+    border-radius: 2px;
+}
+.p-border{
+    padding-top: 1rem !important;
+}
+.border-u{
+    border-bottom: solid 1px #e0e0e0;
+    border-left: solid 1px #e0e0e0;
+    border-right: solid 1px #e0e0e0;
+}
+.bg-white{
+    background-color: white;
+}
+.mb-0{
+    margin-bottom: 0 !important;
+}
+.mt-0{
+    margin-top: 0 !important;
+}
+.mb-5{
+    margin-bottom: 1.3rem;
+}
+.valign{
+    display: flex;
+    align-items: center;
+}

@@ -1,1 +1,42 @@
-<p>sesion works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button mat-raised-button color="accent" class="w-100" type="button" [routerLink]="['/terapeutas/ficha/foniatrica',paciente?.id,sesion]">FICHA FONIATRICA</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button mat-raised-button color="accent" class="w-100 light-green accent-4" type="button" [routerLink]="['/terapeutas/evaluacion/perceptual',paciente?.id,sesion]">EVALUACIÓN PERCEPTUAL</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button mat-raised-button color="accent" class="w-100 light-blue accent-4" type="button" [routerLink]="['/terapeutas/aerodinamicas',paciente?.id,sesion]">MEDIDAS AERODINÁMICAS</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button mat-raised-button color="accent" class="w-100 pink accent-2" type="button" [routerLink]="['/terapeutas/acusticas',paciente?.id,sesion]">MEDIDAS ACÚSTICAS</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button mat-raised-button color="accent" class="w-100 blue darken-3" type="button" [routerLink]="['/terapeutas/evaluacion/autoperceptual',paciente?.id,sesion]">EVALUACIÓN AUTOPERCEPTUAL</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button mat-raised-button color="accent" class="w-100 yellow accent-4" type="button" [routerLink]="['/terapeutas/evaluacion/funcional',paciente?.id,sesion]">EVALUACIÓN FUNCIONAL</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <button mat-raised-button color="accent" class="w-100 orange darken-2" type="button" [routerLink]="['/terapeutas/recursos/terapeuticos',paciente?.id,sesion]">RECURSOS TERAPEUTICOS</button>
+        </div>
+    </div>
+</div>

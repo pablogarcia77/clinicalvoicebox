@@ -1,1 +1,139 @@
-<p>medidas-acusticas works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+        </div>
+        <div class="col s12">
+            <h1 class="titulo versalita">Medidas Acústicas</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <small>Medidas Generales:</small>
+            <hr>
+            <div class="row">
+                <div class="col s6">
+                    <h2>Fo:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h2>dB:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <small>Ind. de perturbación y ruido:</small>
+            <hr>
+            <div class="row">
+                <div class="col s6">
+                    <h2>Jitter:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h3>Shimmer:</h3>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h2>H/N:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h3>Cepstrum:</h3>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+        </div>
+        <div class="col s6 mtn-5">
+            <small>Formantes:</small>
+            <hr>
+            <div class="row">
+                <div class="col s6">
+                    <h2>F1:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h2>F2:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h2>F3:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h2>F4:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <small>Índices acústicos:</small>
+            <hr>
+            <div class="row">
+                <div class="col s6">
+                    <h2>DSI:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <h2>AVQI:</h2>
+                </div>
+                <div class="col s6">
+                    <input pattern="[0-9]*" type="number" inputmode="numeric" class="input">
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="row mt-5">
+                <div class="col s6">
+                    <h3>Software:</h3>
+                </div>
+                <div class="col s6">
+                    <input type="text" class="input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100" type="button">GUARDAR</button>
+    </div>
+</div>

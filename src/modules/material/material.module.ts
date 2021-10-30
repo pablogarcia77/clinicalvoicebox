@@ -22,6 +22,9 @@ import { FormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -50,7 +53,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSliderModule,
+    MatExpansionModule,
+    MatRadioModule
   ],
   exports: [
     CommonModule,
@@ -75,7 +81,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSliderModule,
+    MatExpansionModule,
+    MatRadioModule
   ]
 })
 

@@ -1,1 +1,21 @@
-<p>evaluacion-autoperceptual works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+        </div>
+        <div class="col s12">
+            <h1 class="titulo versalita">Evaluación Autoperceptual</h1>
+        </div>
+    </div>
+    <div class="row" *ngFor="let evaluacion of evaluaciones">
+        <div class="col s1">
+            <mat-checkbox></mat-checkbox>
+        </div>
+        <div class="col s11">
+            <button mat-raised-button class="w-100" color="accent" [ngClass]="{'verde': !isInList(evaluacion.id_titulo), 'rosa': color(evaluacion.id_titulo)?.estado == 0, 'azul': color(evaluacion.id_titulo)?.estado == 1}">{{ evaluacion?.siglas }}</button>
+        </div>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100" type="button">ENVIAR AL PACIENTE</button>
+    </div>
+</div>

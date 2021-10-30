@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/models/persona';
 
 @Component({
   selector: 'app-evaluacion-funcional',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvaluacionFuncionalComponent implements OnInit {
 
-  constructor() { }
+  public paciente: Persona
+  
+  public bordesLibres = ['Liso','Abultamiento localizado uniteral','Abultamiento localizado bilateral','Arqueado','Irregular']
+
+  constructor() {
+    this.paciente = new Persona()
+  }
 
   ngOnInit(): void {
+    this.paciente = JSON.parse(localStorage.getItem('paciente'))
   }
 
 }

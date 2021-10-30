@@ -1,0 +1,15 @@
+small{
+    font-size: 75%;
+}
+.input{
+    border: 2px solid teal;
+    border-radius: 4px;
+    width:40px;
+    height: 42px;
+}
+.mtn-5{
+    margin-top: -7rem;
+}
+.mt-5{
+    margin-top: 2.5rem;
+}

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Persona } from 'src/app/models/persona';
 import { SesionesService } from 'src/app/services/sesiones.service';
 import { MatCarousel, MatCarouselComponent } from '@ngbmodule/material-carousel';
+import { PacientesService } from 'src/app/services/pacientes.service';
 
 @Component({
   selector: 'app-sesiones',
@@ -26,8 +27,10 @@ export class SesionesComponent implements OnInit {
 
   constructor(
     private sesionesService: SesionesService,
-    private activatedRouter: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private pacientesService: PacientesService
   ) {
+    this.paciente = new Persona()
     this.sesiones = new Array<any>()
     this.slides = [
       {
@@ -42,6 +45,8 @@ export class SesionesComponent implements OnInit {
   ngOnInit(): void {
     this.terapeuta = JSON.parse(localStorage.getItem('user'))
 
+    console.log(this.terapeuta)
+
     this.activatedRouter.params.subscribe(
       response => {
         this.idPaciente = response.id
@@ -49,19 +54,28 @@ export class SesionesComponent implements OnInit {
         // console.log('TerapeutaeId: ',this.terapeuta.terapeuta.id)
         this.sesionesService.getSesionesByPacienteAndTerapeuta(response.id,this.terapeuta.terapeuta.id).subscribe(
           response => {
-            this.paciente = response
+            this.paciente.apellido = response.apellido
+            this.paciente.nombre = response.nombre
+            this.paciente.id = this.idPaciente
             this.sesiones = response.sesiones
-            // console.log(this.paciente)
-            // console.log(this.sesiones)
+            localStorage.setItem('paciente',JSON.stringify(this.paciente))
+            console.log(this.paciente)
           }
         )
       }
     )
-    // console.log(this.terapeuta)
   }
 
   recibirPracticas(cantidad){
     this.practicasSemanales = cantidad
+  }
+
+  nuevaSesion(){
+    this.sesionesService.postSesion(this.idPaciente,this.terapeuta.terapeuta.id).subscribe(
+      response => {
+        this.sesiones.push(response)
+      }
+    )
   }
 
 }

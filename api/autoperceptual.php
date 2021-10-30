@@ -18,36 +18,25 @@
   */
   if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     // $GET = json_decode(file_get_contents('php://input'),true);
-    if(isset($_GET['terapeuta']) && isset($_GET['paciente'])){
+    if(isset($_GET['sesion'])){
       //Mostrar todos los pacientes de un terapeuta
-      //SELECT s.estado,s.id_sesion,s.fecha,p.apellido,p.nombre
-//FROM personas p 
-//INNER JOIN pacientes pa
-//ON pa.id_persona=p.id_persona AND pa.id_paciente=1 LEFT JOIN sesiones s ON s.id_paciente=1 AND s.id_terapeuta = 1
-//SELECT s.estado,s.id_sesion,s.fecha,p.apellido,p.nombre FROM sesiones s, pacientes pa, personas p WHERE s.id_paciente=pa.id_paciente AND pa.id_persona=p.id_persona AND s.id_paciente=:paciente AND s.id_terapeuta=:terapeuta
-      $sql = $dbConn->prepare("SELECT s.estado,s.id_sesion,s.fecha,p.apellido,p.nombre FROM personas p INNER JOIN pacientes pa ON pa.id_persona=p.id_persona AND pa.id_paciente=:paciente LEFT JOIN sesiones s ON s.id_paciente=:paciente AND s.id_terapeuta=:terapeuta");
+      $sql = $dbConn->prepare("SELECT estado,id_titulo FROM cuestionarios_sesion WHERE id_sesion=:sesion");
+      $sql->bindValue(':sesion', $_GET['sesion']);
+      $sql->execute();
+      $sql->setFetchMode(PDO::FETCH_ASSOC);
+      header("HTTP/1.1 200 OK");
+      $array = $sql->fetchAll();
+      echo json_encode($array);
+    }else{
+      $sql = $dbConn->prepare("SELECT titulos.id_titulo, titulos.siglas FROM titulos_tests titulos, tipos_tests tipo WHERE titulos.id_tipo_test=tipo.id_tipo_test AND tipo.denominacion LIKE 'CUEST%' ORDER BY titulos.orden ASC");
       $sql->bindValue(':terapeuta', $_GET['terapeuta']);
       $sql->bindValue(':paciente', $_GET['paciente']);
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
       header("HTTP/1.1 200 OK");
-      $array = $sql->fetchAll();
-      $response['apellido'] = $array[0]['apellido'];
-      $response['nombre'] = $array[0]['nombre'];
-      $response['sesiones'] = array();
-      foreach($array as $sesion){
-        $obj = [];
-        $obj['id'] = $sesion['id_sesion'];
-        $obj['fecha'] = $sesion['fecha'];
-        $obj['estado'] = ($sesion['estado'] == 1) ? true : false;
-        array_push($response['sesiones'],$obj);
-      }
-      echo json_encode($response);
-      exit();
-    }else{
-      header("HTTP/1.1 200 OK");
-      echo json_encode(false);
+      echo json_encode($sql->fetchAll());
     }
+    exit();
   }
 
   // Crear un nuevo pedido

@@ -1,1 +1,150 @@
-<p>evaluacion-perceptual works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+        </div>
+        <div class="col s12">
+            <h1 class="titulo versalita">Evaluación Perceptual</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <p class="right">0-3</p>
+        </div>
+        <div class="col s8">
+            <p class="center">E.V.A.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <div class="col s6">
+                <h2 class="letra">G</h2>
+            </div>
+            <div class="col s6">
+                <input pattern="[0-3]" type="number" inputmode="numeric" class="input" />
+            </div>
+        </div>
+        <div class="col s8">
+            <mat-slider
+                thumbLabel
+                tickInterval="100"
+                step="1"
+                min="0"
+                max="100"
+                aria-label="units"
+                class="slider">
+            </mat-slider>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <div class="col s6">
+                <h2 class="letra">R</h2>
+            </div>
+            <div class="col s6">
+                <input pattern="[0-3]" type="number" inputmode="numeric" class="input" />
+            </div>
+        </div>
+        <div class="col s8">
+            <mat-slider
+                thumbLabel
+                tickInterval="100"
+                step="1"
+                min="0"
+                max="100"
+                aria-label="units"
+                class="slider">
+            </mat-slider>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <div class="col s6">
+                <h2 class="letra">B</h2>
+            </div>
+            <div class="col s6">
+                <input pattern="[0-3]" type="number" inputmode="numeric" class="input" />
+            </div>
+        </div>
+        <div class="col s8">
+            <mat-slider
+                thumbLabel
+                tickInterval="100"
+                step="1"
+                min="0"
+                max="100"
+                aria-label="units"
+                class="slider">
+            </mat-slider>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <div class="col s6">
+                <h2 class="letra">A</h2>
+            </div>
+            <div class="col s6">
+                <input pattern="[0-3]" type="number" inputmode="numeric" class="input" />
+            </div>
+        </div>
+        <div class="col s8">
+            <mat-slider
+                thumbLabel
+                tickInterval="100"
+                step="1"
+                min="0"
+                max="100"
+                aria-label="units"
+                class="slider">
+            </mat-slider>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <div class="col s6">
+                <h2 class="letra">S</h2>
+            </div>
+            <div class="col s6">
+                <input pattern="[0-3]" type="number" inputmode="numeric" class="input" />
+            </div>
+        </div>
+        <div class="col s8">
+            <mat-slider
+                thumbLabel
+                tickInterval="100"
+                step="1"
+                min="0"
+                max="100"
+                aria-label="units"
+                class="slider">
+            </mat-slider>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <div class="col s6">
+                <h2 class="letra">I</h2>
+            </div>
+            <div class="col s6">
+                <input pattern="[0-3]" type="number" inputmode="numeric" class="input" />
+            </div>
+        </div>
+        <div class="col s8">
+            <mat-slider
+                thumbLabel
+                tickInterval="100"
+                step="1"
+                min="0"
+                max="100"
+                aria-label="units"
+                class="slider">
+            </mat-slider>
+        </div>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100 teal" type="button">CARGAR AUDIO</button>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100" type="button">GUARDAR</button>
+    </div>
+</div>

@@ -1,1 +1,250 @@
-<p>evaluacion-funcional works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+        </div>
+        <div class="col s12">
+            <h1 class="titulo versalita">Evaluación Funcional</h1>
+        </div>
+    </div>
+    <div class="row bg-white mb-0">
+        <div class="col s12 border p-border">
+            <h3 class="bold versalita">Habilidades fonatorias presentes</h3>
+        </div>
+        <div class="col s12 border-u p-border">
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>e sostenida</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>i sostenida</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación débil</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación media</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación intensa</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación aguda</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación media</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación grave</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación en registro de falsete</span>
+            </div>
+            <div class="col s6 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación en registro modal</span>
+            </div>
+            <div class="col s12 mt-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Fonación en registro frito</span>
+            </div>
+            <div class="col s6 mt-5 mb-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Glissando ascendente</span>
+            </div>
+            <div class="col s6 mt-5 mb-5">
+                <mat-checkbox></mat-checkbox>
+                <span>Glissando descendente</span>
+            </div>
+        </div>
+    </div>
+    <div class="row bg-white mt-0 border-u">
+        <div class="row">
+            <div class="col s12 p-border">
+                <h3 class="bold versalita">Hallazgos funcionales de la fonación</h3>
+                <p>Anatomía laríngea en la relación a la fonación</p>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+        <div class="row valign">
+            <div class="col s6 vert">
+                <p>Borde libre de los pliegues vocales</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Coloracion de los pliegues vocales</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Simetría estructural</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col s12">
+                <p>Fisiología laríngea en conjunto</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Respiración (Abducción)</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Tos voluntaria</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Fonación inspirada</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col s12">
+                <p>Función fonatoria propiamente</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Cierre glótico</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Onda mucosa</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Amplitud</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row valign">
+            <div class="col s6">
+                <p>Actividad supraglótica</p>
+            </div>
+            <div class="col s6">
+                <mat-radio-group class="radio-column">
+                    <mat-radio-button class="radio-button" *ngFor="let bordes of bordesLibres">
+                        {{bordes}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <hr>
+        <div class="row mb-5">
+            <div class="col s12">
+                Observación
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Imágenes</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>No se realizó ninguna carga</p>
+        </mat-expansion-panel>
+    </div>
+    <div class="row">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Videos</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>No se realizó ninguna carga</p>
+        </mat-expansion-panel>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100 teal" type="button">CARGAR IMÁGENES</button>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100 teal" type="button">CARGAR VIDEO</button>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100" type="button">GUARDAR</button>
+    </div>
+</div>
