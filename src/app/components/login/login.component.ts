@@ -16,19 +16,31 @@ export class LoginComponent implements OnInit {
 
   public loginForm: any
 
+  public persona: Persona
+
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
+    this.persona = new Persona()
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['',[Validators.required]],
-      password: ['',[Validators.required]]
-    })
+    this.persona = JSON.parse(localStorage.getItem('user'))
+    if(this.persona){
+      if(this.persona.terapeuta != undefined){
+        this.router.navigate(['/terapeutas'])
+      }else{
+        this.router.navigate(['/pacientes'])
+      }
+    }else{
+      this.loginForm = this.formBuilder.group({
+        username: ['',[Validators.required]],
+        password: ['',[Validators.required]]
+      })
+    }
   }
 
 
