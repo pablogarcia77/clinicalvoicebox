@@ -1,0 +1,58 @@
+.piano{
+    width: 100%;
+    height: 10rem;
+    background-color: white;
+    border: solid 1px black;
+    border-left: none;
+}
+.espacio-negras{
+    height: 70%;
+    display: flex;
+}
+.espacio-blancas{
+    height: 30%;
+    display: flex;
+}
+.teclas-blancas{
+    border-left: solid 1px black;
+    width: calc(100%/9);
+}
+.inicio-fin{
+    width: calc(100%/15);
+    border-left: solid 1px black;
+}
+.teclas-negras{
+    display: flex;
+    background-color: black;
+    width: 11%;
+    margin: 0 auto;
+    color: white;
+}
+.separador{
+    width: 5px;
+    background-color: white;
+}
+.check-negras{
+    position: relative;
+    top: 50%;
+    left: 15%;
+}
+.check-negras p{
+    margin: 0;
+}
+.check-blancas{
+    position: relative;
+    top: 0%;
+    left: 20%;
+}
+.check-blancas p{
+    margin: 5%;
+}
+.checkNota{
+    background-color: white;
+    height: 16px;
+    width: 16px;
+}
+.checkNota > ::ng-deep label.mat-checkbox-layout{
+    vertical-align: top !important;
+}

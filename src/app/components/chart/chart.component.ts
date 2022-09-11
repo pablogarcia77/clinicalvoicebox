@@ -49,7 +49,7 @@ export class ChartComponent implements OnInit {
 
   public pieChartLabels: Label[] = [];
   public pieChartData: number[] = [];
-  public pieChartType: ChartType
+  public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartColors = [
     {
@@ -101,17 +101,24 @@ export class ChartComponent implements OnInit {
     this.practicasService.getPracticasByPaciente(this.idPaciente).subscribe(
       response => {
         console.log(response)
-        response.pie.forEach(e => {
-          this.pieChartData.push(e.tiempo)
-          this.pieChartLabels.push(e.nombre)
-          this.totalPracticas = this.totalPracticas*1 + (e.practicas*1)
-          this.pieChartColors[0]['backgroundColor'].push(e.color)
-          this.pieChartType = this.tipoGrafico
-          console.log(this.totalPracticas)
-        })
-
+        if (response.pie.length != 0) {
+          response.pie.forEach(e => {
+            this.pieChartData.push(e.tiempo)
+            this.pieChartLabels.push(e.nombre)
+            this.totalPracticas = this.totalPracticas*1 + (e.practicas*1)
+            this.pieChartColors[0]['backgroundColor'].push(e.color)
+            this.pieChartType = this.tipoGrafico
+            console.log(this.totalPracticas)
+          })
+        }
         this.enviarPracticas.emit(this.totalPracticas)
-        let primerSemana = response.bar[0].semana
+        if (this.totalPracticas == 0) {
+          this.pieChartType='pie';
+          this.pieChartLabels.push('No hay prácticas');
+          this.pieChartColors[0]['backgroundColor'].push('#c5c5c5')
+          this.pieChartData.push(1);
+        }
+        // let primerSemana = response.bar[0].semanas
         // response.bar.map(e => {
         //   if(e.semana === primerSemana){
 

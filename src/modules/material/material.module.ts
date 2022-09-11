@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 
 
@@ -84,7 +85,10 @@ import {MatRadioModule} from '@angular/material/radio';
     MatNativeDateModule,
     MatSliderModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    NgxMatDatetimePickerModule, 
+    NgxMatNativeDateModule, 
+    NgxMatTimepickerModule 
   ]
 })
 

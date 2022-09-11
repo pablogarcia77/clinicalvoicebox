@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Persona } from 'src/app/models/persona';
 import { AutoperceptualService } from 'src/app/services/autoperceptual.service';
 
@@ -8,7 +10,7 @@ import { AutoperceptualService } from 'src/app/services/autoperceptual.service';
   templateUrl: './evaluacion-autoperceptual.component.html',
   styleUrls: ['./evaluacion-autoperceptual.component.css']
 })
-export class EvaluacionAutoperceptualComponent implements OnInit {
+export class EvaluacionAutoperceptualComponent implements OnInit, OnDestroy {
 
   public paciente: Persona
 
@@ -17,10 +19,30 @@ export class EvaluacionAutoperceptualComponent implements OnInit {
   public evaluaciones: Array<any>
 
   public realizadas: Array<any>
+
+  public disabledButton: boolean = false;
+
+  respondidos: number = 0;
+
+  enviadas: number = 0;
+
+  nuevas: number = 0;
+
+  messageButton: string = 'ENVIAR AL PACIENTE';
+
+  enviarEvaluaciones: boolean = false;
+
+  body: any = {
+    sesion: 0,
+    titulos: []
+  };
+
+  autoperceptualSubscription!: Subscription;
   
   constructor(
     private autoperceptualService: AutoperceptualService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.paciente = new Persona()
     this.evaluaciones = new Array<any>()
@@ -32,31 +54,17 @@ export class EvaluacionAutoperceptualComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(
       response => {
-        this.sesion = response.sesion
+        this.sesion = response.sesion;
+        this.body.sesion = this.sesion;
       }
     )
 
-    this.autoperceptualService.getEvaluaciones().subscribe(
-      response => {
-        this.evaluaciones = response
-        console.log(this.evaluaciones)
-        
-      }
-    )
+    this.getEvaluaciones();
+   
+  }
 
-    this.autoperceptualService.getEvaluacionesDone(this.sesion).subscribe(
-      response => {
-        this.realizadas = this.unique(response)
-        console.log(this.realizadas)
-        this.evaluaciones.forEach((e) => {
-        //   // console.log(this.realizadas.some(real => real.id_titulo === e.id_titulo))
-        //   console.log(this.isInList(e.id_titulo))
-          console.log(this.color(e.id_titulo)?.estado)
-        })
-      }
-    )
-
-    
+  ngOnDestroy(): void {
+    this.autoperceptualSubscription && this.autoperceptualSubscription.unsubscribe();
   }
 
   unique(array){
@@ -75,5 +83,97 @@ export class EvaluacionAutoperceptualComponent implements OnInit {
       e.id_titulo === evaluacion
     )
   }
+
+  changeButton(event: any, evaluacion: any): void {
+    const evalFind = this.realizadas.find( (obj: any) => obj.id_titulo === evaluacion.id_titulo)
+    evalFind ? 
+      Number(evalFind.estado) === 0 ? 
+        event.checked ? this.respondidos++ : this.respondidos-- 
+      : event.checked ? this.addEnviadas(evaluacion) : this.removeEnviadas(evaluacion) 
+      : event.checked ? this.addNuevas(evaluacion) : this.removeNuevas(evaluacion);
+    console.log(this.body)
+    console.log('respondidos', this.respondidos)
+    console.log('enviados', this.enviadas)
+    console.log('nuevas', this.nuevas)
+    this.respondidos > 0 ? this.disabledButton = true : this.disabledButtonAndMessage();
+  }
+
+  disabledButtonAndMessage(): void {
+    this.disabledButton = false;
+    this.disabledButton = this.enviadas > 0 && this.nuevas > 0 ? true : false;
+    if (this.enviadas > 0 && this.nuevas == 0) {
+      this.messageButton = 'ANULAR EVALUACIÓN';
+      this.enviarEvaluaciones = true;
+    }
+    if (this.enviadas == 0 && this.nuevas > 0) {
+      this.messageButton = 'ENVIAR AL PACIENTE';
+      this.enviarEvaluaciones = false;
+    }
+    if (this.enviadas == 0 && this.nuevas == 0) {
+      this.enviarEvaluaciones = false;
+    }
+  }
+
+  addNuevas(evaluacion): void {
+    this.nuevas++;
+    this.body.titulos.push(evaluacion.id_titulo)
+  }
+
+  removeNuevas(evaluacion): void {
+    this.nuevas--;
+    this.body.titulos = this.body.titulos.filter(t => t != evaluacion.id_titulo);
+  }
+
+  addEnviadas(evaluacion): void {
+    this.enviadas++;
+    this.body.titulos.push(evaluacion.id_titulo)
+  }
+
+  removeEnviadas(evaluacion): void {
+    this.enviadas--;
+    this.body.titulos = this.body.titulos.filter(t => t != evaluacion.id_titulo);
+  }
+
+  submitForm(): void {
+    if (this.nuevas > 0) {
+      this.autoperceptualSubscription = this.autoperceptualService.postNewEvaluaciones(this.body).subscribe(
+        resp => {
+          if (resp) {
+            this.getEvaluaciones();
+            this.snackBar.open('Evaluaciones enviadas', 'Aceptar')
+          }
+        }
+      );
+    }
+
+    if (this.enviadas > 0) {
+      this.autoperceptualSubscription = this.autoperceptualService.deleteEvaluacionesEnviadas(this.body).subscribe(
+        resp => {
+          if (resp) {
+            this.getEvaluaciones();
+            this.snackBar.open('Evaluaciones anuladas', 'Aceptar')
+            this.body.titulos = [];
+          }
+        }
+      );
+    }
+    
+  }
+
+  getEvaluaciones(): void {
+    this.autoperceptualSubscription = this.autoperceptualService.getEvaluaciones().subscribe(
+      response => {
+        this.evaluaciones = response
+        console.log(this.evaluaciones)
+      }
+    )
+
+    this.autoperceptualSubscription = this.autoperceptualService.getEvaluacionesDone(this.sesion).subscribe(
+      response => {
+        this.realizadas = this.unique(response)
+      }
+    )
+  }
+
 
 }

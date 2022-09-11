@@ -1,0 +1,21 @@
+<div class="input-field">
+    <div class="row center-align">
+        <div class="col s4">
+            <button mat-fab color="warn" (click)="record()" [disabled]="recordDisabled" type="button">
+                <mat-icon>keyboard_voice</mat-icon>
+            </button>
+        </div>
+        <div class="col s4">
+            <button mat-fab color="primary" (click)="pause()" [disabled]="pauseDisabled" type="button">
+                <mat-icon>pause</mat-icon>
+            </button>
+        </div>
+        <div class="col s4">
+            <button mat-fab color="primary" (click)="stopRecord()" [disabled]="stopDisabled" type="button">
+                <mat-icon>stop</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div name="formats"></div>
+<ol name="recordingsList"></ol>

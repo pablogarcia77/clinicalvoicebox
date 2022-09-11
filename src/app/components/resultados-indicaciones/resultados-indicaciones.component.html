@@ -1,0 +1,34 @@
+<form [formGroup]="form" (submit)="formSubmit()">
+    <div class="container">
+        <h5 class="titulo">Resumen:</h5>
+        <div *ngFor="let indicacion of indicaciones">
+            <div *ngIf="indicacion.id != 0">
+                <p class="bold">{{ indicacion.nombre }}:</p>
+                <p>Glissandos: {{ indicacion.indicacion.glissandos | arrayComas }}</p>
+                <p>Vocales: {{ indicacion.indicacion.vocales | arrayComas }}</p>
+                <p>Notas: {{ indicacion.indicacion.notas | arrayComas }}</p>
+            </div>
+        </div>
+        <div *ngIf="data.evolucion">
+            <p class="bold">Evolución del paciente:</p>
+            <p>{{ data.evolucion }}</p>
+        </div>
+        <p>Se le indica al paciente para implementar hasta la próxima sesión</p>
+        <div class="d-flex flex-column">
+            <mat-checkbox color="primary" *ngFor="let indicacion of indicaciones" (change)="setIndicacion($event, indicacion)">{{ indicacion.nombre }}</mat-checkbox>
+        </div>
+        <mat-form-field>
+            <input matInput [ngxMatDatetimePicker]="picker" placeholder="Próxima sesión" formControlName="dateProxima" readonly (click)="picker.open()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false" [stepHour]="1"
+              [stepMinute]="1" [touchUi]="true" color="primary">
+            <ng-template>
+                <span>OK</span>
+            </ng-template>
+            </ngx-mat-datetime-picker>
+        </mat-form-field>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button mat-flat-button type="submit">ACEPTAR</button>
+    </div>
+</form>

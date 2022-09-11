@@ -1,44 +1,60 @@
-<div class="container">
-    <div class="row">
-        <div class="col s12">
-            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
-        </div>
-        <div class="col s12">
-            <h1 class="titulo versalita">Medidas Aerodinámicas</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s8">
-            <div class="row mb-0">
-                <div class="col s6">
-                    <h2 class="right">TMS:</h2>
-                </div>
-                <div class="col s6">
-                    <input pattern="[0-9]*" inputmode="numeric" id="tms" class="input" type="number" required>
-                </div>
+<form [formGroup]="form" (submit)="formSubmit(resultados)">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col s6">
-                    <h2 class="right">TMF:</h2>
-                </div>
-                <div class="col s6">
-                    <input pattern="[0-9]*" inputmode="numeric" id="tmf" class="input" type="number" required>
-                </div>
+            <div class="col s12">
+                <h1 class="titulo versalita">Medidas Aerodinámicas</h1>
             </div>
         </div>
-        <div class="col s4">
-            <div class="row pt-5">
-                <div class="col s7">
-                    <input pattern="[0-9]*" inputmode="numeric" id="sz" class="input" type="text">
+        <div class="row">
+            <div class="col s8">
+                <div class="row mb-0">
+                    <div class="col s6">
+                        <h2 class="right">TMS:</h2>
+                    </div>
+                    <div class="col s6">
+                        <input pattern="[0-9]*" inputmode="numeric" id="tms" formControlName="tms" [ngClass]="{'input': !form.get('tms').errors, 'inputError': form.get('tms').errors}" type="number" />
+                    </div>
                 </div>
-                <div class="col s5">
-                    <h2>s/z</h2>
+                <hr>
+                <div class="row">
+                    <div class="col s6">
+                        <h2 class="right">TMF:</h2>
+                    </div>
+                    <div class="col s6">
+                        <input pattern="[0-9]*" inputmode="numeric" id="tmf" [ngClass]="{'input': !form.get('tmf').errors, 'inputError': form.get('tmf').errors}" type="number" formControlName="tmf">
+                    </div>
+                </div>
+            </div>
+            <div class="col s4">
+                <div class="row pt-5">
+                    <div class="col s7">
+                        <input pattern="[0-9]*" inputmode="numeric" id="sz" class="input" type="text" [value]="divide()">
+                    </div>
+                    <div class="col s5">
+                        <h2>s/z</h2>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <button mat-raised-button color="accent" class="w-100" type="submit">GUARDAR</button>
+        </div>
     </div>
-    <div class="row">
-        <button mat-raised-button color="accent" class="w-100" type="button">GUARDAR</button>
-    </div>
-</div>
+</form>
+
+<ng-template #resultados>
+    <mat-dialog-title>
+        <h1>Resultados</h1>
+    </mat-dialog-title>
+    <mat-dialog-content>
+        <p>TMS: {{ values.tms }}</p>
+        <p>TMF: {{ values.tmf }}</p>
+        <p>S/Z: {{ divide() }}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-flat-button mat-dialog-close [routerLink]="['/terapeutas/sesion', paciente.id, sesion]">Aceptar</button>
+    </mat-dialog-actions>
+</ng-template>

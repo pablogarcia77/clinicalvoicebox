@@ -1,0 +1,22 @@
+span{
+    color: #9e9e9e;
+    margin-left: 10px;
+}
+.section {
+    display: flex;
+    flex-direction: column;
+}
+  
+.example-margin {
+    margin: 0 10px;
+    color: #9e9e9e;
+}
+.margin-p{
+    margin: 10px;
+}
+.margin{
+    margin-top: 2rem;
+}
+.last-panel {
+    margin-bottom: 16px;
+}

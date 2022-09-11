@@ -63,4 +63,30 @@
     }
     return array_values($temp_array);
   }
+
+  function getParamsDelete($input){
+    $filterParams = [];
+    $sesion = intVal($input['sesion']);
+    foreach($input['titulos'] as $param){
+      $val = intVal($param);
+      $filterParams[] = "($sesion, $val)";
+    }
+    return implode(", ", $filterParams);
+	}
+
+  function obtainNotas($array, $isField){
+    $notas = "";
+    foreach($array as $valor){
+      $notas .= ($isField) ? "`".$valor."`," : "'".$valor."',";
+    }
+    return rtrim($notas,",");
+  }
+
+  function obtainVocales($array, $isField){
+    $vocales = "";
+    foreach($array as $valor){
+      $vocales .= ($isField) ? "`".$valor['valoracion']."`," : "'".$valor['valoracion']."',";
+    }
+    return rtrim($vocales,",");
+  }
  ?>

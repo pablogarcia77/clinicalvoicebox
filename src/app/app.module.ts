@@ -47,6 +47,12 @@ import * as moment from 'moment';
 import { MatCarouselModule } from '@ngbmodule/material-carousel';
 import { ChartsModule } from 'ng2-charts';
 import { ChartComponent } from './components/chart/chart.component';
+import { IndicacionesTerapeuticasSesionComponent } from './components/terapeuta/sesiones/sesion/indicaciones-terapeuticas/indicaciones-sesion-terapeuticas.component';
+import { PianoComponent } from './components/piano/piano.component';
+import { ResultadosIndicacionesComponent } from './components/resultados-indicaciones/resultados-indicaciones.component';
+import { ArrayComasPipe } from './pipes/array-comas.pipe';
+import { GlissandosPipe } from './pipes/glissandos.pipe';
+import { GrabacionComponent } from './components/grabacion/grabacion.component';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -85,7 +91,13 @@ export function momentAdapterFactory() {
     PrincipalPacienteComponent,
     SidenavComponent,
     DialogComponent,
-    ChartComponent
+    ChartComponent,
+    IndicacionesTerapeuticasSesionComponent,
+    PianoComponent,
+    ResultadosIndicacionesComponent,
+    ArrayComasPipe,
+    GlissandosPipe,
+    GrabacionComponent
   ],
   imports: [
     BrowserModule,

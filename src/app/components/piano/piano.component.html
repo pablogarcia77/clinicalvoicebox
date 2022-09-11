@@ -1,0 +1,233 @@
+<div class="row">
+    <div class="col s6 d-flex flex-column flex-wrap align-content-around">
+        <mat-checkbox color="primary" *ngFor="let vocal of vocales" [value]="vocal" (change)="addVocal($event)">{{ vocal.valoracion }}</mat-checkbox>
+    </div>
+    <div class="col s6 d-flex flex-column flex-wrap align-content-around">
+        <mat-checkbox color="primary" *ngFor="let glissando of glissandos" [value]="glissando" class="glissandos" (change)="addGlissando($event)">{{ glissando.valoracion }}</mat-checkbox>
+    </div>
+</div>
+<div class="row">
+    <div class="piano">
+        <div class="espacio-negras">
+            <div class="inicio-fin"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>A2#</p>
+                    <mat-checkbox type="checkbox" value="A2#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="inicio-fin"></div>
+            <div class="inicio-fin"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>C3#</p>
+                    <mat-checkbox type="checkbox" value="C3#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="separador"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>D3#</p>
+                    <mat-checkbox type="checkbox" value="D3#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="inicio-fin"></div>
+            <div class="inicio-fin"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>F3#</p>
+                    <mat-checkbox type="checkbox" value="F3#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="separador"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>G3#</p>
+                    <mat-checkbox type="checkbox" value="G3#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="separador"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>A3#</p>
+                    <mat-checkbox type="checkbox" value="A3#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="inicio-fin"></div>
+        </div>
+        <div class="espacio-blancas">
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>A2</p>
+                    <mat-checkbox type="checkbox" value="A2" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>B2</p>
+                    <mat-checkbox type="checkbox" value="B2" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>C3</p>
+                    <mat-checkbox type="checkbox" value="C3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>D3</p>
+                    <mat-checkbox type="checkbox" value="D3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>E3</p>
+                    <mat-checkbox type="checkbox" value="E3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>F3</p>
+                    <mat-checkbox type="checkbox" value="F3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>G3</p>
+                    <mat-checkbox type="checkbox" value="G3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>A3</p>
+                    <mat-checkbox type="checkbox" value="A3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>B3</p>
+                    <mat-checkbox type="checkbox" value="B3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="piano">
+        <div class="espacio-negras">
+            <div class="inicio-fin"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>A3#</p>
+                    <mat-checkbox type="checkbox" value="A3#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="inicio-fin"></div>
+            <div class="inicio-fin"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>C4#</p>
+                    <mat-checkbox type="checkbox" value="C4#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="separador"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>D4#</p>
+                    <mat-checkbox type="checkbox" value="D4#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="inicio-fin"></div>
+            <div class="inicio-fin"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>F4#</p>
+                    <mat-checkbox type="checkbox" value="F4#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="separador"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>G4#</p>
+                    <mat-checkbox type="checkbox" value="G4#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="separador"></div>
+            <div class="teclas-negras">
+                <label class="check-negras">
+                    <p>A4#</p>
+                    <mat-checkbox type="checkbox" value="A4#" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="inicio-fin"></div>
+        </div>
+        <div class="espacio-blancas">
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>A3</p>
+                    <mat-checkbox type="checkbox" value="A3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>B3</p>
+                    <mat-checkbox type="checkbox" value="B3" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>C4</p>
+                    <mat-checkbox type="checkbox" value="C4" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>D4</p>
+                    <mat-checkbox type="checkbox" value="D4" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>E4</p>
+                    <mat-checkbox type="checkbox" value="E4" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>F4</p>
+                    <mat-checkbox type="checkbox" value="F4" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>G4</p>
+                    <mat-checkbox type="checkbox" value="G4" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>A4</p>
+                    <mat-checkbox type="checkbox" value="A4" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+            <div class="teclas-blancas">
+                <label class="check-blancas">
+                    <p>B4</p>
+                    <mat-checkbox type="checkbox" value="B4" color="primary" class="checkNota" (change)="addNota($event)"></mat-checkbox>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <mat-radio-group class="radio-column" (change)="addValoracion($event)">
+            <mat-radio-button class="radio-button" color="primary" *ngFor="let valoracion of valoraciones" [value]="valoracion.id_valoracion" [value]="valoracion">
+                <span class="wrap-label">
+                    {{ valoracion.valoracion }}
+                </span>
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+</div>

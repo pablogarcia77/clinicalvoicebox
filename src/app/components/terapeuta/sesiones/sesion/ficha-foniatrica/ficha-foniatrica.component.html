@@ -1,1 +1,1029 @@
-<p>ficha-foniatrica works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1 class="titulo versalita">Ficha Foniátrica</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Apellido</mat-label>
+                <input matInput [value]="paciente.apellido" [disabled]="true"/>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Nombre</mat-label>
+                <input matInput [value]="paciente.nombre" [disabled]="true"/>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input matInput [value]="paciente.fecha_nacimiento | date:'dd/MM/yyyy'" [disabled]="true"/>
+            </mat-form-field>
+        </div>
+        <div class="col s6">
+            <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Diagnostico ORL</mat-label>
+                <input matInput value="Alvarez"/>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <p>Lesión Reactiva Contralateral:</p>
+        </div>
+        <div class="col s6">
+            <mat-radio-group class="radio-column">
+                <mat-radio-button class="radio-button" color="primary" *ngFor="let le of lesiones" [value]="le">
+                    <span class="wrap-label">
+                        {{le}}
+                    </span>
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>Antecedentes: 
+                <span *ngFor="let s of selected; let f = first; let l = last;">
+                    {{s.antecedente}}
+                    <span *ngIf="!(f && l) && !l">,</span>
+                </span>
+            </p>
+        </div>
+        <div class="col s12">
+            <mat-form-field appearance="legacy">
+                <mat-label>Seleccione</mat-label>
+                <mat-select multiple [(value)]="selected">
+                  <mat-option *ngFor="let antecedente of antecedentes" [value]="antecedente">{{antecedente.antecedente}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Higiene Vocal</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Ingesta diaria de agua:</p>
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let ia of ingestaAgua" [value]="ia.value">
+                                    <span class="wrap-label">
+                                        {{ia.label}}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Ingesta diaria de cafeína (café, té, refrescos, otros):</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Medidas diarias de alcohol:</p>
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let ma of medidasAlcohol" [value]="ma.value">
+                                    <span class="wrap-label">
+                                        {{ma.label}}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Historial del fumador</p>
+                        </div>
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let f of fumador" [value]="f">
+                                    <span class="wrap-label">
+                                        {{ f }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>¿A qué edad dejaste?</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-3rem">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Para fumadores actuales y exfumadores</p>
+                        </div>
+                        <div class="col s6">
+                            <p>A qué edad comenzó a fumar:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-3rem">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s5">
+                            <mat-checkbox color="primary" value="cigarrillos" name="fuma">Cigarrillos</mat-checkbox>
+                        </div>
+                        <div class="col s7 d-flex p-0">
+                            <div class="col s5 d-flex flex-column justify-around">
+                                <input type="text" class="input w-3rem">
+                                <input type="text" class="input w-3rem mt-10">
+                            </div>
+                            <div class="col s7 d-flex flex-column justify-around">
+                                <label for="">Cigarrillos por día</label>
+                                <label for="">Paquetes por día</label>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s5">
+                            <mat-checkbox color="primary" value="pipa" name="fuma">Pipa</mat-checkbox>
+                        </div>
+                        <div class="col s7">
+                            <input type="text" class="input w-3rem">
+                            <label for="">Por día</label>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s5">
+                            <mat-checkbox color="primary" value="habano" name="fuma">Habano</mat-checkbox>
+                        </div>
+                        <div class="col s7">
+                            <input type="text" class="input w-3rem">
+                            <label for="">Por día</label>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s5">
+                            <mat-checkbox color="primary" value="masca tabaco" name="fuma">Masco<br>tabaco:</mat-checkbox>
+                        </div>
+                        <div class="col s7 d-flex p-0">
+                            <div class="col s5 d-flex flex-column justify-around">
+                                <input type="text" class="input w-3rem">
+                                <input type="text" class="input w-3rem mt-10">
+                            </div>
+                            <div class="col s7 d-flex flex-column justify-around">
+                                <label for="">Por día</label>
+                                <label for="">Por semana</label>
+                            </div>                           
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s5">
+                            <mat-checkbox color="primary" value="fuma drogas recreativas" name="fuma">Fuma drogas<br>recreativas:</mat-checkbox>
+                        </div>
+                        <div class="col s7 d-flex p-0">
+                            <div class="col s5 d-flex flex-column justify-around">
+                                <input type="text" class="input w-3rem">
+                                <input type="text" class="input w-3rem mt-10">
+                                <input type="text" class="input w-3rem mt-10">
+                            </div>
+                            <div class="col s7 d-flex flex-column justify-around">
+                                <label for="">Por día</label>
+                                <label for="">Por semana</label>
+                                <label for="">Por mes</label>
+                            </div>                           
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Actividades vocales (describa todo lo que corresponda)</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <p class="bold right">Comentarios</p>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Teléfono sin auriculares</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Teléfono con auriculares</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Teléfono con altavoz</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Hablando: conversación uno a uno</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Hablar en entornos ruidosos</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Hablar con grupos</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Gritar o animar</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Susurro</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Imitando a otros</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Limpieza o "aclarar" la garganta</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Tos</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Fonación durante el ejercicio físico</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Canto</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Otro</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Cuestiones relacionadas al ambiente (describa solo los que correspondan)</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <p class="bold right">Comentarios</p>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Humo</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Productos químicos</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Alérgenos</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Cambios de temperatura</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row mt-10">
+                        <div class="col s6">
+                            <p>Historial de reflujo</p>
+                        </div>
+                        <div class="col s6">
+                            <mat-radio-group class="radio-row">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let iv of interpreteVocal" [value]="iv">
+                                    <span class="wrap-label">
+                                        {{ iv }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Diagnóstico</p>
+                        </div>
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let d of diagnosticos" [value]="d">
+                                    <span class="wrap-label">
+                                        {{ d }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Síntomas:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Frecuencia de síntomas:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Manejo/tratamiento (marque todo lo que corresponda):</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <mat-checkbox color="primary" value="comportamiento">Comportamiento</mat-checkbox>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <mat-checkbox color="primary" value="medicación">Medicación</mat-checkbox>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <mat-checkbox color="primary" value="dosis">Dosis</mat-checkbox>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <p class="versalita bold">Interprete vocal</p>
+                        <mat-radio-group class="radio-row">
+                            <mat-radio-button class="radio-button" color="primary" *ngFor="let iv of interpreteVocal" [value]="iv">
+                                <span class="wrap-label">
+                                    {{iv}}
+                                </span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Tipo de entrenamiento vocal:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Número de años realizando:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Rango de voz cantada:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Tipo de música interpretada:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Tipo de acompañamiento:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Tipo de amplificación utilizada durante la performance:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Lugares de actuación:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Cantidad de ensayos por semana:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Régimen de calentamiento / enfriamiento:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Otro:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Evaluación oral-motora</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-radio-group class="radio-row">
+                                <mat-radio-button class="radio-button" color="primary" value="dentro de los límites de la normalidad">
+                                    <span class="wrap-label">
+                                        Dentro de los límites de la normalidad
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Observaciones</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Evaluación de la tensión muscular</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Tensión Observada:</p>
+                        </div>
+                    </div>
+                    <div class="row"  *ngFor="let tension of tensionMuscular">
+                        <div class="col s12">
+                            <mat-checkbox color="primary" [value]="tension">{{ tension }}</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Comentarios:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p class="bold">Soporte laríngeo</p>
+                        </div>
+                        <div class="col s12">
+                            <p>En reposo:</p>
+                        </div>
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let sl of soporteLaringeo" [value]="sl">
+                                    <span class="wrap-label">
+                                        {{ sl }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Elevado durante el habla conectada:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Elevado durante vocal sostenida:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Sensibilidad a la palpitación / masaje:</p>
+                        </div>
+                        <div class="col s6">
+                            <mat-radio-group class="radio-column" [(ngModel)]="isSensibilidad">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let s of sensibilidad" [value]="s.valor">
+                                    <span class="wrap-label">
+                                        {{ s.nombre }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="col s6">
+                            <mat-radio-group class="radio-column" [disabled]="!isSensibilidad">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let ss of sensibilidadSi" [value]="ss">
+                                    <span class="wrap-label">
+                                        {{ ss }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row mt-50">
+                        <div class="col s6">
+                            <p>Espacio tirohioideo reducido en reposo:</p>
+                        </div>
+                        <div class="col s6">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let espacio of espacioTirohioideo" [value]="espacio">
+                                    <span class="wrap-label">
+                                        {{ espacio }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Tensión de la base de la lengua</p>
+                        </div>
+                        <div class="col s6">
+                            Al fonar:
+                        </div>
+                        <div class="col s6">
+                            <mat-radio-group class="radio-row">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let tf of tensionFonar" [value]="tf">
+                                    <span class="wrap-label">
+                                        {{ tf }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="col s6">
+                            En reposo:
+                        </div>
+                        <div class="col s6">
+                            <mat-radio-group class="radio-row">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let tr of tensionReposo" [value]="tr">
+                                    <span class="wrap-label">
+                                        {{ tr }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="col s6">
+                            <p>Comentarios:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Soporte respiratorio</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <p>En reposo</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let sr of soporteReposo">
+                        <div class="col s12">
+                            <mat-checkbox color="primary" [value]="sr">{{ sr }}</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Comentarios:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Fonación sostenida</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let sr of soporteReposo">
+                        <div class="col s12">
+                            <mat-checkbox color="primary" [value]="sr">{{ sr }}</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Comentarios:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Conversación</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let sr of soporteReposo">
+                        <div class="col s12">
+                            <mat-checkbox color="primary" [value]="sr">{{ sr }}</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Comentarios:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>Habla con aire residual:</p>
+                        </div>
+                        <div class="col s6">
+                            <mat-radio-group class="radio-row">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let ar of aireResidual" [value]="ar">
+                                    <span class="wrap-label">
+                                        {{ ar }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Alineamiento postural</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Postura:</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" [value]="p" *ngFor="let p of postura">
+                                    <span class="wrap-label">
+                                        {{ p }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row mt-50">
+                        <div class="col s12">
+                            <p>Cuello:</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" [value]="c" *ngFor="let c of cuello">
+                                    <span class="wrap-label">
+                                        {{ c }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row mt-50">
+                        <div class="col s12">
+                            <p>Hombros:</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" [value]="h" *ngFor="let h of hombros">
+                                    <span class="wrap-label">
+                                        {{ h }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row mt-50">
+                        <div class="col s12">
+                            <p>Pelvis:</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" [value]="p" *ngFor="let p of pelvis">
+                                    <span class="wrap-label">
+                                        {{ p }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row mt-50">
+                        <div class="col s6">
+                            <p>Comentarios:</p>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Impacto de la alteración vocal en el funcionamiento</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Limitaciones en actividades y restricciones en la participación (marque todas las que correspondan)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="w-100 table">
+                            <thead>
+                                <th></th>
+                                <th>No</th>
+                                <th>Leve</th>
+                                <th>Moderado</th>
+                                <th>Severo</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Actividades diarias</td>
+                                    <td *ngFor="let av of alteracionVocal">
+                                        <mat-radio-button class="radio-button" color="primary" [value]="av" name="actividades"></mat-radio-button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Interacciones interpersonales</td>
+                                    <td *ngFor="let av of alteracionVocal">
+                                        <mat-radio-button class="radio-button" color="primary" [value]="av" name="interacciones"></mat-radio-button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Educación</td>
+                                    <td *ngFor="let av of alteracionVocal">
+                                        <mat-radio-button class="radio-button" color="primary" [value]="av" name="educacion"></mat-radio-button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empleo</td>
+                                    <td *ngFor="let av of alteracionVocal">
+                                        <mat-radio-button class="radio-button" color="primary" [value]="av" name="empleo"></mat-radio-button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Comunidad</td>
+                                    <td *ngFor="let av of alteracionVocal">
+                                        <mat-radio-button class="radio-button" color="primary" [value]="av" name="comunidad"></mat-radio-button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="versalita bold">Observaciones Generales</mat-panel-title>
+                </mat-expansion-panel-header>
+                <section class="section">
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Diagnostico Fonoaudiológico presuntivo</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let f of dfp" [value]="f.id_dfp">
+                                        {{ f.diagnostico }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Pronóstico de mejoría con tratamiento</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column">
+                                <mat-radio-button class="radio-button" color="primary" [value]="m" name="mejoria" *ngFor="let m of mejoria">
+                                    <span class="wrap-label">
+                                        {{ m }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Otras referencias sugeridas</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let r of referencias">
+                        <div class="col s12">
+                            <mat-checkbox color="primary" [value]="r">{{ r }}</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>Otros procedimientos recomendados</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let p of procedimientos">
+                        <div class="col s12">
+                            <mat-checkbox color="primary" [value]="p">{{ p }}</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <input type="text" class="input w-100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Observaciones:</mat-label>
+                                <textarea matInput placeholder="Escriba alguna observación"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </section>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="row">
+        <button mat-raised-button color="accent" class="w-100" type="button">GUARDAR CAMBIOS</button>
+    </div>
+</div>

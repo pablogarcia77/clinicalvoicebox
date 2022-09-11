@@ -9,13 +9,13 @@
     </div>
     <div class="row" *ngFor="let evaluacion of evaluaciones">
         <div class="col s1">
-            <mat-checkbox></mat-checkbox>
+            <mat-checkbox (change)="changeButton($event, evaluacion)"></mat-checkbox>
         </div>
         <div class="col s11">
             <button mat-raised-button class="w-100" color="accent" [ngClass]="{'verde': !isInList(evaluacion.id_titulo), 'rosa': color(evaluacion.id_titulo)?.estado == 0, 'azul': color(evaluacion.id_titulo)?.estado == 1}">{{ evaluacion?.siglas }}</button>
         </div>
     </div>
     <div class="row">
-        <button mat-raised-button color="accent" class="w-100" type="button">ENVIAR AL PACIENTE</button>
+        <button mat-raised-button color="accent" class="w-100" type="button" [disabled]="disabledButton" (click)="submitForm()">{{ messageButton }}</button>
     </div>
 </div>

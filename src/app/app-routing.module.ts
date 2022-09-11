@@ -19,6 +19,7 @@ import { EvaluacionPerceptualComponent } from './components/terapeuta/sesiones/s
 import { EvaluacionFuncionalComponent } from './components/terapeuta/sesiones/sesion/evaluacion-funcional/evaluacion-funcional.component';
 import { RecursosTerapeuticosComponent } from './components/terapeuta/sesiones/sesion/recursos-terapeuticos/recursos-terapeuticos.component';
 import { FichaFoniatricaComponent } from './components/terapeuta/sesiones/sesion/ficha-foniatrica/ficha-foniatrica.component';
+import { IndicacionesTerapeuticasSesionComponent } from './components/terapeuta/sesiones/sesion/indicaciones-terapeuticas/indicaciones-sesion-terapeuticas.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -43,6 +44,7 @@ const routes: Routes = [
       {path: 'evaluacion/funcional/:paciente/:sesion', component: EvaluacionFuncionalComponent},
       // Recursos Terapeuticos
       {path: 'recursos/terapeuticos/:paciente/:sesion', component: RecursosTerapeuticosComponent},
+      {path: 'indicaciones/terapeuticas/:paciente/:sesion', component: IndicacionesTerapeuticasSesionComponent},
       // Ficha Foniatrica
       {path: 'ficha/foniatrica/:paciente/:sesion', component: FichaFoniatricaComponent},
     ]

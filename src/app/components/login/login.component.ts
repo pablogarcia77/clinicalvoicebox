@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Paciente } from 'src/app/models/paciente';
@@ -14,8 +14,11 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm: any
-
+  public loginForm: FormGroup = this.formBuilder.group({
+    username: ['',[Validators.required]],
+    password: ['',[Validators.required]]
+  });
+  
   public persona: Persona
 
   constructor(
@@ -35,11 +38,6 @@ export class LoginComponent implements OnInit {
       }else{
         this.router.navigate(['/pacientes'])
       }
-    }else{
-      this.loginForm = this.formBuilder.group({
-        username: ['',[Validators.required]],
-        password: ['',[Validators.required]]
-      })
     }
   }
 

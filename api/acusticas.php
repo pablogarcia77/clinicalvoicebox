@@ -17,29 +17,29 @@
     listar todos los usuarios
   */
   if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-    if (!isset($_GET['id'])){
+    if (!isset($_GET['paciente']) && !isset($_GET['sesion'])){
       //Mostrar todos los usuarios
-      $sql = $dbConn->prepare("SELECT * FROM cursos");
+      $sql = $dbConn->prepare("SELECT m.fo,m.jitter,m.db,m.shimmer,m.hn,m.cepstrum,m.dsi,m.software,m.avqi,m.f1,m.f2,m.f3,m.f4 
+      FROM medidas_acusticas m, sesiones s 
+      WHERE m.id_sesion=s.id_sesion
+      ORDER BY id_acusticas DESC LIMIT 1");
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
       header("HTTP/1.1 200 OK");
-      $array = $sql->fetchAll();
-      $response = array();
-      foreach($array as $curso){
-          $curso['estado'] = ($curso['estado'] == '0') ? false : true;
-          $curso['habilita_certificado'] = ($curso['habilita_certificado'] == '0') ? false : true;
-          array_push($response,$curso);
-      }
-      echo json_encode($response);
+      echo json_encode($sql->fetchAll());
       exit();
     }else {
       //Mostrar un usuario especifico
-      $sql = $dbConn->prepare("SELECT * FROM cursos WHERE id=:id");
-      $sql->bindValue(':id', $_GET['id']);
+      $sql = $dbConn->prepare("SELECT m.fo,m.jitter,m.db,m.shimmer,m.hn,m.cepstrum,m.dsi,m.software,m.avqi,m.f1,m.f2,m.f3,m.f4 
+      FROM medidas_acusticas m, sesiones s 
+      WHERE m.id_sesion=s.id_sesion AND s.id_paciente=:paciente AND s.id_sesion=:sesion
+      ORDER BY id_acusticas DESC LIMIT 1");
+      $sql->bindValue(':paciente', $_GET['paciente']);
+      $sql->bindValue(':sesion', $_GET['sesion']);
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
       header("HTTP/1.1 200 OK");
-      echo json_encode( $sql->fetchAll()  );
+      echo json_encode( $sql->fetch()  );
       exit();
     }
   }
@@ -47,7 +47,7 @@
   // Crear un nuevo pedido
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $input = json_decode(file_get_contents('php://input'),true);
-    $sql = $dbConn->prepare("INSERT INTO cursos (curso) VALUES (:curso)");
+    $sql = $dbConn->prepare("INSERT INTO medidas_acusticas (id_sesion,fo,jitter,db,shimmer,hn,cepstrum,dsi,software,avqi,f1,f2,f3,f4) VALUES (:sesion,:fo,:jitter,:db,:shimmer,:hn,:cepstrum,:dsi,:software,:avqi,:f1,:f2,:f3,:f4)");
     bindAllValues($sql, $input);
     try{
       $sql->execute();

@@ -1,1 +1,199 @@
-<p>recursos-terapeuticos works!</p>
+<form [formGroup]="form" (submit)="submitForm()">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+            </div>
+            <div class="col s12">
+                <h1 class="titulo versalita">Indicaciones Terapéuticas</h1>
+            </div>
+        </div>
+        <div class="row bg-white">
+            <div class="col s12 border p-border">
+                <h3 class="bold versalita">Objetivos Terapéuticos</h3>
+                <mat-radio-group class="radio-column" formControlName="tipo">
+                    <mat-radio-button class="radio-button" color="primary" *ngFor="let ob of objetivos" [value]="ob">
+                        <span class="wrap-label">
+                            {{ob}}
+                        </span>
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="col s12 border-u p-border">
+                <h3 class="bold versalita">Indicaciones Terapéuticas</h3>
+                <h3 class="bold versalita">Intervención Indirecta</h3>
+                <section class="section">
+                    <mat-checkbox color="primary" class="example-margin" [value]="indirecta?.id_tarea" (change)="addIndicacion($event)">{{indirecta?.nombre}}</mat-checkbox>
+                    <p class="margin-p">{{indirecta?.descripcion}}</p>
+                    <div class="row">
+                        <div class="col s12">
+                            <mat-radio-group class="radio-column" (change)="addValoracionIndirecta($event, indirecta)">
+                                <mat-radio-button class="radio-button" color="primary" *ngFor="let valoracion of valoraciones" [value]="valoracion.id_valoracion" [value]="valoracion">
+                                    <span class="wrap-label">
+                                        {{ valoracion.valoracion }}
+                                    </span>
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <app-grabacion
+                        [sesion]="sesion"
+                        [indicacion]="0">
+                    </app-grabacion>
+                </section>
+                
+                <h3 class="bold versalita">Intervención Directa</h3>
+                <mat-accordion>
+                    <h3>Auditiva</h3>
+                    <mat-expansion-panel *ngFor="let auditiva of auditivas; let last = last; let index = index" [ngClass]="{'last-panel': last}">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ auditiva.nombre }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <section class="section">
+                            <small>{{ auditiva.descripcion }}</small>
+                            <app-piano
+                                [vocales]="vocales"
+                                [glissandos]="glissandos"
+                                [valoraciones]="valoraciones"
+                                (results)="obtenerResultados($event, auditiva)">
+                            </app-piano>
+                            <app-grabacion
+                                [sesion]="sesion"
+                                [indicacion]="auditiva.id_tarea">
+                            </app-grabacion>
+                        </section>
+                    </mat-expansion-panel>
+                    <h3>Sematosensorial</h3>
+                    <mat-expansion-panel *ngFor="let som of somatosensoriales; let last = last; let index = index" [ngClass]="{'last-panel': last}">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ som.nombre }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <section class="section">
+                            <small>{{ som.descripcion }}</small>
+                            <app-piano
+                                [vocales]="vocales"
+                                [glissandos]="glissandos"
+                                [valoraciones]="valoraciones"
+                                (results)="obtenerResultados($event, som)">
+                            </app-piano>
+                            <app-grabacion
+                                [sesion]="sesion"
+                                [indicacion]="som.id_tarea">
+                            </app-grabacion>
+                        </section>
+                    </mat-expansion-panel>
+                    <h3>Musculoesquelética</h3>
+                    <mat-expansion-panel *ngFor="let mus of muscoloesqueleticas; let last = last; let index = index" [ngClass]="{'last-panel': last}">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ mus.nombre }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="section">
+                            <small>{{mus.descripcion}}</small>
+                            <app-piano
+                                [vocales]="vocales"
+                                [glissandos]="glissandos"
+                                [valoraciones]="valoraciones"
+                                (results)="obtenerResultados($event, mus)">
+                            </app-piano>
+                            <app-grabacion
+                                [sesion]="sesion"
+                                [indicacion]="mus.id_tarea">
+                            </app-grabacion>
+                        </div>
+                    </mat-expansion-panel>
+                    <h3>Respiratoria</h3>
+                    <mat-expansion-panel *ngFor="let r of respiratorias; let last = last; let index = index" [ngClass]="{'last-panel': last}">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ r.nombre }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <section class="section">
+                            <small>{{r.descripcion}}</small>
+                            <app-piano
+                                [vocales]="vocales"
+                                [glissandos]="glissandos"
+                                [valoraciones]="valoraciones"
+                                (results)="obtenerResultados($event, r)">
+                            </app-piano>
+                            <app-grabacion
+                                [sesion]="sesion"
+                                [indicacion]="r.id_tarea">
+                            </app-grabacion>
+                        </section>
+                    </mat-expansion-panel>
+                    <h3>Función vocal</h3>
+                    <mat-expansion-panel *ngFor="let v of funcionVocales; let last = last; let index = index" [ngClass]="{'last-panel': last}">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ v.nombre }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <section class="section">
+                            <small>{{v.descripcion}}</small>
+                            <app-piano
+                                [vocales]="vocales"
+                                [glissandos]="glissandos"
+                                [valoraciones]="valoraciones"
+                                (results)="obtenerResultados($event, v)">
+                            </app-piano>
+                            <app-grabacion
+                                [sesion]="sesion"
+                                [indicacion]="v.id_tarea">
+                            </app-grabacion>
+                        </section>
+                    </mat-expansion-panel>
+                    <h3>Otros</h3>
+                    <mat-expansion-panel *ngFor="let o of otros; let last = last; let index = index" [ngClass]="{'last-panel': last}">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ o.nombre }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <section class="section">
+                            <small>{{o.descripcion}}</small>
+                            <app-piano
+                                [vocales]="vocales"
+                                [glissandos]="glissandos"
+                                [valoraciones]="valoraciones"
+                                (results)="obtenerResultados($event, o)">
+                            </app-piano>
+                            <app-grabacion
+                                [sesion]="sesion"
+                                [indicacion]="o.id_tarea">
+                            </app-grabacion>
+                        </section>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <h3 class="bold versalita margin">Dispositivos Externos</h3>
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let ext of externos; let index = index" [ngClass]="{'last-panel': last}">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ ext.nombre }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <section class="section">
+                            <small>{{ext.descripcion}}</small>
+                            <app-piano
+                                [vocales]="vocales"
+                                [glissandos]="glissandos"
+                                [valoraciones]="valoraciones"
+                                (results)="obtenerResultados($event, ext)">
+                            </app-piano>
+                            <app-grabacion
+                                [sesion]="sesion"
+                                [indicacion]="ext.id_tarea">
+                            </app-grabacion>
+                        </section>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <br>
+        </div>
+        <div class="row bg-white">
+            <div class="col s12 border p-border">
+                <h3 class="bold versalita">Evolución del Paciente</h3>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Escriba la evolución del paciente</mat-label>
+                    <textarea matInput formControlName="evolucion"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <button mat-raised-button color="accent" class="w-100" type="submit" [disabled]="!form.valid">GUARDAR</button>
+        </div>
+    </div>
+</form>

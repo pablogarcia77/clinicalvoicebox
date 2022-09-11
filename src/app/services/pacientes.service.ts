@@ -44,4 +44,8 @@ export class PacientesService {
     return this.http.post(this.urlBase,paciente)
   }
 
+  getPacienteLocalStorage(): Persona {
+    return JSON.parse(localStorage.getItem('paciente'));
+  }
+
 }

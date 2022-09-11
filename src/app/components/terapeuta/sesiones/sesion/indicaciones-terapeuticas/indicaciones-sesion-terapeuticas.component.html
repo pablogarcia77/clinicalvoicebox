@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+        </div>
+        <div class="col s12">
+            <h1 class="titulo versalita">Indicaciones Terapéuticas</h1>
+        </div>
+    </div>
+    <div class="row bg-white mb-0" *ngFor="let ind of indicacionesRealizar; let i = index">
+        <div class="col s12 border" [ngClass]="{'p-border': i == 0, 'border-u': i != 0}">
+            <h3 class="bold versalita">{{ ind.nombre }}</h3>
+            <div *ngIf="ind.id_tarea != 0">
+                <div class="row">
+                    <div class="col s5 d-flex flex-column">
+                        <mat-checkbox color="primary" *ngFor="let v of vocales" [value]="v.id_valoracion">{{ v.valoracion }}</mat-checkbox>
+                    </div>
+                    <div class="col s7">
+                        <mat-checkbox color="primary" *ngFor="let g of glissandos" [value]="g.id_valoracion">{{ g.valoracion }}</mat-checkbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 d-flex justify-center">
+                        <app-piano [vocales]="vocalesElegidas" class="w-95"></app-piano>
+                    </div>
+                </div>
+            </div>
+            <mat-radio-group class="radio-column">
+                <mat-radio-button class="radio-button" color="primary" *ngFor="let v of valoraciones" [value]="v.id_valoracion">
+                    <span class="wrap-label">
+                        {{ v.valoracion }}
+                    </span>
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+</div>
+<button (click)="mostrar()">Click</button>

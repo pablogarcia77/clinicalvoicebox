@@ -42,22 +42,23 @@
   // Crear un nuevo pedido
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $input = json_decode(file_get_contents('php://input'),true);
-    $sql = $dbConn->prepare("INSERT INTO sesiones (id_paciente,id_terapeuta) VALUES (:paciente,:terapeuta)");
-    $sql->bindValue(':paciente',$personaId);
-    $sql->bindValue(':terapeuta',$idProfesion);
-    $pac = removeAttr($input,'id_profesion');
-    bindAllValues($sql, $pac);
 
-    // echo json_encode($pac);
+    $cantidad = count($input['titulos']);
+    $query = "INSERT INTO cuestionarios_sesion (id_sesion,id_titulo) VALUES ";
+    for ($i=0; $i<$cantidad; $i++) {
+      $query = $query."(".$input['sesion'].", ".$input['titulos'][$i]."),";
+    }
+    $resultQuery = rtrim($query, ",");
+    $sql = $dbConn->prepare($resultQuery);
     try{
       $sql->execute();
       $sesionId = $dbConn->lastInsertId();
       if($sesionId){
-        $response['id'] = $sesionId;
-        $response['estado'] = true;
-        $response['fecha'] = date("Y-m-d h:i:s");
+        $sql2 = $dbConn->prepare("INSERT INTO c_cuestionario_sesion (id_cuestionario_sesion) VALUES (:ultimo)");
+        $sql2->bindValue(':ultimo', $sesionId);
+        $sql2->execute();
         header("HTTP/1.1 200 OK");
-        echo json_encode($response);
+        echo json_encode(true);
         exit();
       }
     }catch(PDOException $e){
@@ -69,11 +70,10 @@
 
   //Borrar
   if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
-    $id = $_GET['id'];
-    $muestra = $_GET['muestra'];
-    $statement = $dbConn->prepare("UPDATE pacientes SET muestra=:muestra WHERE id_paciente=:id");
-    $statement->bindValue(':id', $id);
-    $statement->bindValue(':muestra', $muestra);
+    $input = json_decode(file_get_contents('php://input'), true);
+    $campos = getParamsDelete($input);
+    $query = "DELETE FROM cuestionarios_sesion WHERE (id_sesion, id_titulo) IN ($campos)";
+    $statement = $dbConn->prepare($query);
     $state = $statement->execute();
     header("HTTP/1.1 200 OK");
     echo json_encode($state);
