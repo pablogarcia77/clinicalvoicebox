@@ -38,7 +38,8 @@
                     </div>
                     <app-grabacion
                         [sesion]="sesion"
-                        [indicacion]="0">
+                        [indicacion]="0"
+                        (sendValues)="retrieveGrabacion($event)">
                     </app-grabacion>
                 </section>
                 
@@ -59,7 +60,8 @@
                             </app-piano>
                             <app-grabacion
                                 [sesion]="sesion"
-                                [indicacion]="auditiva.id_tarea">
+                                [indicacion]="auditiva.id_tarea"
+                                (sendValues)="retrieveGrabacion($event)">
                             </app-grabacion>
                         </section>
                     </mat-expansion-panel>
@@ -78,7 +80,8 @@
                             </app-piano>
                             <app-grabacion
                                 [sesion]="sesion"
-                                [indicacion]="som.id_tarea">
+                                [indicacion]="som.id_tarea"
+                                (sendValues)="retrieveGrabacion($event)">
                             </app-grabacion>
                         </section>
                     </mat-expansion-panel>
@@ -97,7 +100,8 @@
                             </app-piano>
                             <app-grabacion
                                 [sesion]="sesion"
-                                [indicacion]="mus.id_tarea">
+                                [indicacion]="mus.id_tarea"
+                                (sendValues)="retrieveGrabacion($event)">
                             </app-grabacion>
                         </div>
                     </mat-expansion-panel>
@@ -116,7 +120,8 @@
                             </app-piano>
                             <app-grabacion
                                 [sesion]="sesion"
-                                [indicacion]="r.id_tarea">
+                                [indicacion]="r.id_tarea"
+                                (sendValues)="retrieveGrabacion($event)">
                             </app-grabacion>
                         </section>
                     </mat-expansion-panel>
@@ -135,7 +140,8 @@
                             </app-piano>
                             <app-grabacion
                                 [sesion]="sesion"
-                                [indicacion]="v.id_tarea">
+                                [indicacion]="v.id_tarea"
+                                (sendValues)="retrieveGrabacion($event)">
                             </app-grabacion>
                         </section>
                     </mat-expansion-panel>
@@ -154,7 +160,8 @@
                             </app-piano>
                             <app-grabacion
                                 [sesion]="sesion"
-                                [indicacion]="o.id_tarea">
+                                [indicacion]="o.id_tarea"
+                                (sendValues)="retrieveGrabacion($event)">
                             </app-grabacion>
                         </section>
                     </mat-expansion-panel>
@@ -175,7 +182,8 @@
                             </app-piano>
                             <app-grabacion
                                 [sesion]="sesion"
-                                [indicacion]="ext.id_tarea">
+                                [indicacion]="ext.id_tarea"
+                                (sendValues)="retrieveGrabacion($event)">
                             </app-grabacion>
                         </section>
                     </mat-expansion-panel>

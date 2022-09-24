@@ -53,6 +53,8 @@ import { ResultadosIndicacionesComponent } from './components/resultados-indicac
 import { ArrayComasPipe } from './pipes/array-comas.pipe';
 import { GlissandosPipe } from './pipes/glissandos.pipe';
 import { GrabacionComponent } from './components/grabacion/grabacion.component';
+import { NgAudioRecorderModule } from 'ng-audio-recorder';
+import { CuestionarioComponent } from './components/terapeuta/sesiones/sesion/evaluacion-autoperceptual/cuestionario/cuestionario.component';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -97,7 +99,8 @@ export function momentAdapterFactory() {
     ResultadosIndicacionesComponent,
     ArrayComasPipe,
     GlissandosPipe,
-    GrabacionComponent
+    GrabacionComponent,
+    CuestionarioComponent
   ],
   imports: [
     BrowserModule,
@@ -109,6 +112,7 @@ export function momentAdapterFactory() {
     HttpClientModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
     MatCarouselModule,
+    NgAudioRecorderModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500,panelClass: ['blue-snackbar']}},

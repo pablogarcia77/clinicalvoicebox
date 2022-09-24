@@ -18,4 +18,8 @@
     </div>
 </div>
 <div name="formats"></div>
-<ol name="recordingsList"></ol>
+<ol name="recordingsList" *ngIf="blobUrl">
+    <audio controls>
+        <source [src]="blobUrl" type="audio/webm">
+    </audio>
+</ol>

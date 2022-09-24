@@ -213,4 +213,16 @@ export class RecursosTerapeuticosComponent implements OnInit, OnDestroy {
     }
      return newArray;
   }
+
+  retrieveGrabacion(grabacion: any): void {
+    let arr = this.indicacionEnviar.indicaciones.reverse();
+    let select = arr.find(ind => ind.id === grabacion.indicacion);
+    select = {
+      ...select,
+      grabacion
+    };
+    this.indicacionEnviar.indicaciones = [...this.indicacionEnviar.indicaciones, select];
+    console.log(this.indicacionEnviar.indicaciones);
+    console.log(grabacion);
+  }
 }

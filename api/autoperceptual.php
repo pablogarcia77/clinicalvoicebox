@@ -28,13 +28,36 @@
       $array = $sql->fetchAll();
       echo json_encode($array);
     }else{
-      $sql = $dbConn->prepare("SELECT titulos.id_titulo, titulos.siglas FROM titulos_tests titulos, tipos_tests tipo WHERE titulos.id_tipo_test=tipo.id_tipo_test AND tipo.denominacion LIKE 'CUEST%' ORDER BY titulos.orden ASC");
-      $sql->bindValue(':terapeuta', $_GET['terapeuta']);
-      $sql->bindValue(':paciente', $_GET['paciente']);
-      $sql->execute();
-      $sql->setFetchMode(PDO::FETCH_ASSOC);
-      header("HTTP/1.1 200 OK");
-      echo json_encode($sql->fetchAll());
+      if(isset($_GET['id_titulo'])){
+        $sql = $dbConn->prepare("SELECT t.titulo, p.pregunta, t.id_tipo_test, p.id_pregunta, m.id_titulo,t.autor 
+        FROM preguntas p, titulos_tests t, modelos m 
+        WHERE m.id_titulo=t.id_titulo AND m.id_pregunta=p.id_pregunta AND m.id_titulo=:id_titulo");
+        $sql->bindValue(':id_titulo', $_GET['id_titulo']);
+        $sql->execute();
+        $sql->setFetchMode(PDO::FETCH_ASSOC);
+        header("HTTP/1.1 200 OK");
+        $array = $sql->fetchAll();
+        $response['titulo'] = $array[0]['titulo'];
+        $response['id_titulo'] = $array[0]['id_titulo'];
+        $response['id_tipo_test'] = $array[0]['id_tipo_test'];
+        $preguntas = array();
+        foreach($array as $value) {
+          $obj['id_pregunta'] = $value['id_pregunta'];
+          $obj['pregunta'] = $value['pregunta'];
+          array_push($preguntas, $obj);
+        }
+        $response['preguntas'] = $preguntas;
+        $response['autor'] = $array[0]['autor'];
+        echo json_encode($response);
+      } else {
+        $sql = $dbConn->prepare("SELECT titulos.id_titulo, titulos.siglas FROM titulos_tests titulos, tipos_tests tipo WHERE titulos.id_tipo_test=tipo.id_tipo_test AND tipo.denominacion LIKE 'CUEST%' ORDER BY titulos.orden ASC");
+        $sql->bindValue(':terapeuta', $_GET['terapeuta']);
+        $sql->bindValue(':paciente', $_GET['paciente']);
+        $sql->execute();
+        $sql->setFetchMode(PDO::FETCH_ASSOC);
+        header("HTTP/1.1 200 OK");
+        echo json_encode($sql->fetchAll());
+      }
     }
     exit();
   }
