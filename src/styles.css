@@ -11,6 +11,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .w-50{
     width: 50%;
 }
+.w-30{
+    width: 30%;
+}
+.w-40{
+    width: 40%;
+}
 .principal{
     min-height: 100vh;
     background-image: url("assets/images/fondo2.png");
@@ -128,6 +134,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .justify-center{
     justify-content: center;
 }
+.justify-between{
+    justify-content: space-between;
+}
 .items-center{
     align-items: center;
 }
@@ -154,4 +163,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .justify-content-start{
     justify-content: flex-start;
+}
+.small-text{
+    font-size: 80%;
+}
+.text-center{
+    text-align: center;
+}
+.h-4{
+    height: 40px;
 }

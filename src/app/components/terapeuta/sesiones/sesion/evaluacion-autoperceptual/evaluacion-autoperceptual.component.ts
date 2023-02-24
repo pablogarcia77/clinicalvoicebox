@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Persona } from 'src/app/models/persona';
 import { AutoperceptualService } from 'src/app/services/autoperceptual.service';
@@ -42,7 +42,8 @@ export class EvaluacionAutoperceptualComponent implements OnInit, OnDestroy {
   constructor(
     private autoperceptualService: AutoperceptualService,
     private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.paciente = new Persona()
     this.evaluaciones = new Array<any>()
@@ -173,6 +174,10 @@ export class EvaluacionAutoperceptualComponent implements OnInit, OnDestroy {
         this.realizadas = this.unique(response)
       }
     )
+  }
+
+  goToCuestionario(evaluacion: any): void {
+    this.router.navigate(['/terapeutas/evaluacion/autoperceptual/',this.paciente.id,this.sesion, evaluacion.id_titulo]);
   }
 
 

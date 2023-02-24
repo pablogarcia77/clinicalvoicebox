@@ -12,7 +12,14 @@
             <mat-checkbox (change)="changeButton($event, evaluacion)"></mat-checkbox>
         </div>
         <div class="col s11">
-            <button mat-raised-button class="w-100" color="accent" [ngClass]="{'verde': !isInList(evaluacion.id_titulo), 'rosa': color(evaluacion.id_titulo)?.estado == 0, 'azul': color(evaluacion.id_titulo)?.estado == 1}">{{ evaluacion?.siglas }}</button>
+            <button 
+                mat-raised-button 
+                class="w-100" 
+                color="accent" 
+                [ngClass]="{'verde': !isInList(evaluacion.id_titulo), 'rosa': color(evaluacion.id_titulo)?.estado == 0, 'azul': color(evaluacion.id_titulo)?.estado == 1}"
+                (click)="goToCuestionario(evaluacion)">
+                {{ evaluacion?.siglas }}
+            </button>
         </div>
     </div>
     <div class="row">

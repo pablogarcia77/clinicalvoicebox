@@ -17,45 +17,10 @@
     listar todos los usuarios
   */
   if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-    if (!isset($_GET['id_tipo_test'])){
-      //Mostrar todos los usuarios
-      $sql = $dbConn->prepare("SELECT * FROM valoraciones");
-      $sql->execute();
-      $sql->setFetchMode(PDO::FETCH_ASSOC);
-      header("HTTP/1.1 200 OK");
-      $response = array();
-      $array = $sql->fetchAll();
-      if(isset($_GET['indicaciones'])){
-        array_push($response,$array[32]);
-        array_push($response,$array[33]);
-        array_push($response,$array[34]);
-        array_push($response,$array[35]);
-        array_push($response,$array[36]);
-        echo json_encode($response);
-      }else{
-        if(isset($_GET['vocales'])){
-          array_push($response,$array[107]);
-          array_push($response,$array[108]);
-          array_push($response,$array[109]);
-          array_push($response,$array[110]);
-          array_push($response,$array[111]);
-          array_push($response,$array[112]);
-          echo json_encode($response);
-        }else{
-          if(isset($_GET['glissandos'])){
-            array_push($response,$array[113]);
-            array_push($response,$array[114]);
-            echo json_encode($response);
-          }else{
-            echo json_encode($array);
-          } 
-        }
-      }
-      exit();
-    }else {
+    if (isset($_GET['idc'])) {
       //Mostrar un usuario especifico
-      $sql = $dbConn->prepare("SELECT v.id_valoracion, v.valoracion, v.puntos FROM valoraciones v WHERE v.id_tipo_test=:id_tipo_test");
-      $sql->bindValue(':id_tipo_test', $_GET['id_tipo_test']);
+      $sql = $dbConn->prepare("SELECT v.puntos FROM valoraciones v, resultados_cuestionarios rc WHERE rc.id_valoracion=v.id_valoracion AND rc.id_c_cuestionario_sesion=:idc");
+      $sql->bindValue(':idc', $_GET['idc']);
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
       header("HTTP/1.1 200 OK");
@@ -64,7 +29,6 @@
       foreach($array as $value){
         $obj['id_valoracion'] = intVal($value['id_valoracion']);
         $obj['valoracion'] = $value['valoracion'];
-        $obj['puntos'] = intVal($value['puntos']);
         array_push($response, $obj);
       }
       echo json_encode( $response );

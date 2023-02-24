@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Valoracion } from '../models/evaluaciones/valoracion';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class ValoracionesService {
 
   getGlissandos():Observable<any>{
     return this.http.get(this.urlBase + '?glissandos')
+  }
+
+  getValoracionesCuestionarios(id: number): Observable<Valoracion[]> {
+    return this.http.get<Valoracion[]>(`${this.urlBase}?id_tipo_test=${id}`);
   }
 }

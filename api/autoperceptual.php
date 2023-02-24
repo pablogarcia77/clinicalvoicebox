@@ -38,11 +38,11 @@
         header("HTTP/1.1 200 OK");
         $array = $sql->fetchAll();
         $response['titulo'] = $array[0]['titulo'];
-        $response['id_titulo'] = $array[0]['id_titulo'];
-        $response['id_tipo_test'] = $array[0]['id_tipo_test'];
+        $response['id_titulo'] = intVal($array[0]['id_titulo']);
+        $response['id_tipo_test'] = intVal($array[0]['id_tipo_test']);
         $preguntas = array();
         foreach($array as $value) {
-          $obj['id_pregunta'] = $value['id_pregunta'];
+          $obj['id_pregunta'] = intVal($value['id_pregunta']);
           $obj['pregunta'] = $value['pregunta'];
           array_push($preguntas, $obj);
         }

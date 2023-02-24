@@ -1,1 +1,90 @@
-<p>cuestionario works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <p class="right">Paciente: {{paciente?.apellido}}, {{paciente?.nombre}}</p>
+        </div>
+    </div>
+    <div class="row bg-white mt-0">
+        <div class="col s12 border p-border">
+            <div class="row">
+                <div class="col s12">
+                    <h2 class="bold versalita">{{ cuestionario.titulo }}</h2>
+                </div>
+                <div class="col s12">
+                    <button mat-raised-button type="button" color="accent" [disabled]="isAnswer" (click)="answer()">RESPONDER</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="cuestionario.id_titulo == 1 && isAnswer">
+                <div class="col s12">
+                    <p>
+                        Los siguientes son síntomas o sensaciones que se pueden sentir en la garganta que pueden ocurrir como parte de su problema vocal. 
+                        Por favor indique la frecuencia e intensidad de los mismos.
+                    </p>
+                </div>
+            </div>
+            <div class="row" *ngIf="cuestionario.id_titulo == 10 && isAnswer">
+                <div class="col s12">
+                    <p>En el último mes, ¿cómo le afectaron los siguientes problemas?</p>
+                    <p>0 = sin alteración</p>
+                    <p>5 = alteración severa</p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 border-u p-border" *ngFor="let pregunta of cuestionario.preguntas; index as index">
+            <img src="assets/images/frecuencia.png" alt="frecuencia" *ngIf="cuestionario.id_titulo == 1 && index == 0">
+            <img src="assets/images/intensidad.png" alt="frecuencia" *ngIf="cuestionario.id_titulo == 1 && index == 8">
+            <p>{{ pregunta.pregunta }}</p>
+            <mat-radio-group (change)="addValoracion(pregunta.id_pregunta, $event)" *ngIf="isAnswer">
+                <mat-radio-button class="radio-button" color="primary" *ngFor="let valoracion of valoraciones"  [value]="valoracion">
+                    <span class="wrap-label">
+                        {{ valoracion.valoracion }}
+                    </span>
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="col s12 border-u h-4 d-flex items-center justify-center">
+            <small class="bold">
+                <i class="small-text text-center">{{ cuestionario.autor }}</i>
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 d-flex justify-between">
+            <button mat-raised-button color="accent" class="w-40" [disabled]="!isAnswer" (click)="review()">REVISAR</button>
+            <button mat-raised-button color="accent" class="w-40" [disabled]="!isSave" (click)="save(resultados)">GUARDAR</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #resultados>
+    <mat-dialog-title>
+        <h1>Resultados</h1>
+    </mat-dialog-title>
+    <mat-dialog-content>
+        <ng-container *ngIf="cuestionario.id_titulo == 1">
+            <p>Puntaje total de Frecuencia: {{ puntajes.frecuencia }}</p>
+            <p>Puntaje total de Intensidad: {{ puntajes.intensidad }}</p>
+        </ng-container>
+        <ng-container *ngIf="cuestionario.id_titulo == 8">
+            <p>Puntaje bruti: {{ puntajes.bruto }}</p>
+            <p>Dominio funcionamiento físico: {{ puntajes.fisico }} puntos</p>
+            <p>Dominio socioemocional: {{ puntajes.emocional }} puntos</p>
+        </ng-container>
+        <!-- Aqui pueden ir los cuestionarios VHI-30 / VHI-Partner / VFHQ (2, 6 y 14) -->
+        <ng-container *ngIf="cuestionario.id_titulo == 2">
+            <p>Puntaje total: {{ puntajes.total }} puntos - Índice de Discapacidad Vocal: {{ puntajes.indiceDiscapacidadVocal }}</p>
+            <p>Subescala funcional: {{ puntajes.subescalaFuncional }} puntos  - Índice de Discapacidad: {{ puntajes.indiceDiscapacidad1 }}</p>
+            <p>Subescala organica: {{ puntajes.subescalaOrganica }} puntos  - Índice de Discapacidad: {{ puntajes.indiceDiscapacidad2 }}</p>
+            <p>Subescala emocional: {{ puntajes.subescalaEmocional }} puntos  - Índice de Discapacidad: {{ puntajes.indiceDiscapacidad2 }}</p>
+        </ng-container>
+        <ng-container *ngIf="cuestionario.id_titulo == 6 || cuestionario.id_titulo == 14">
+            <p>Parte 1: {{ puntajes.subescala }} puntos</p>
+            <p>Parte 2: {{ puntajes.subescalaOrganica }} puntos</p>
+            <p>Parte 3: {{ puntajes.subescalaEmocional }} puntos</p>
+        </ng-container>
+        <ng-container></ng-container>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-flat-button mat-dialog-close [routerLink]="['/terapeutas/evaluacion/autoperceptual', paciente.id, sesion]">Aceptar</button>
+    </mat-dialog-actions>
+</ng-template>
